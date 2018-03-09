@@ -1,0 +1,12 @@
+#player-stats {
+  text-align: center;
+}
+
+#bounding-box {
+  text-align: center;
+}
+
+#myCanvas {
+  display: inline;
+  border: 1px solid #d3d3d3;
+}

@@ -48,7 +48,7 @@ var ctx = canvas.getContext('2d');
 function startGame() {
     myGameArea.start();
     for (var i=0;i<coordinates.length;i++) {
-      addGamePiece = new ball(coordinates[i][0], coordinates[i][1], getRandomColor(), 5, 5, 10);
+      addGamePiece = new ball(coordinates[i][0], coordinates[i][1], getRandomColor(), 3, 3, 10);
       balls.push(addGamePiece);
     }
 }
@@ -81,6 +81,14 @@ function drawBalls() {
 function moveBalls() {
   ctx.clearRect(0,0, canvas.width, canvas.height);
 
+  ctx = myGameArea.context;
+  ctx.beginPath();
+  ctx.arc(60, 60, 50, 0, Math.PI * 2, true);
+  ctx.closePath();
+  ctx.fillStyle = "red";
+  ctx.fill();
+
+
   // move each rect in the balls[] array by its own directionx
   for (var i=0;i<balls.length;i++) {
     ball = balls[i];
@@ -103,24 +111,19 @@ function moveBalls() {
   window.requestAnimationFrame(moveBalls);
 }
 
-window.requestAnimationFrame(moveBalls);
 
-// canvas.addEventListener('mouseover', function(e) {
-//   raf = window.requestAnimationFrame(moveBall);
-// });
-//
-// canvas.addEventListener('mouseout', function(e) {
-//   window.cancelAnimationFrame(raf);
-// });
+function buttonClick(subEvent)
+{
+    var mainEvent = subEvent ? subEvent : window.event;
+    alert("This button click occurred at: X(" +
+    mainEvent.screenX + ") and Y(" + mainEvent.screenY + ")");
+}
 
-// canvas.addEventListener('click', function(e) {
-//   // if (!running) {
-//   //   raf = window.requestAnimationFrame(draw);
-//   //   running = true;
-//   // }
-//   ball.draw();
-// });
 
 `LOAD AND PLAY THE GAME`
+
+// start the animation loop
+window.requestAnimationFrame(moveBalls);
+
 
 console.log(balls);

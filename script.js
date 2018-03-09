@@ -5,12 +5,22 @@
 
 var balls = [];
 var coordinates = [
-  [50,50],
-  [100,100],
-  [50,150],
-  [500,250]
+  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
+  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
+  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
+  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
+  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)]
 ];
+
+var raf;
+
+// queue to store the hit areas
+var queue = [];
+
 var running = false;
+var hitareax = 300;
+var hitareay = 300;
+var hitarear = 50;
 
 `HELPER FUNCTIONS`
 
@@ -27,7 +37,6 @@ var myGameArea = {
     // function to create canvas and start the game
     canvas : document.createElement("canvas"),
     start : function() {
-        console.log("yes");
         this.canvas.width = 800;
         this.canvas.height = 500;
         this.canvas.id = "myCanvas";
@@ -63,10 +72,30 @@ function ball(x, y, color, vx, vy, radius) {
     this.radius = radius;
 }
 
+// returns if ball is inside hit area (if there has been a collision)
+function insideHitArea(x, y) {
+  if (Math.sqrt((hitareax-x)*(hitareax-x) + (hitareay-y)*(hitareay-y)) <= hitarear) {
+			return true;
+		}
+	else {
+		return false;
+	}
+}
+
+// draw a ball onto the canvas
+function drawBall(x, y, r, color) {
+  ctx = myGameArea.context;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2, true);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
 // draw the balls onto the canvas
 function drawBalls() {
-
   for (var i=0;i<balls.length;i++) {
+
     ball = balls[i];
     ctx = myGameArea.context;
     ctx.beginPath();
@@ -79,38 +108,61 @@ function drawBalls() {
 
 // add motion to the ball
 function moveBalls() {
+
   ctx.clearRect(0,0, canvas.width, canvas.height);
 
   ctx = myGameArea.context;
   ctx.beginPath();
-  ctx.arc(60, 60, 50, 0, Math.PI * 2, true);
+  ctx.arc(300, 300, 50, 0, Math.PI * 2, true);
   ctx.closePath();
   ctx.fillStyle = "red";
   ctx.fill();
 
+  ctx = myGameArea.context;
+  ctx.beginPath();
+  ctx.arc(50, 100, 50, 0, Math.PI * 2, true);
+  ctx.closePath();
+  ctx.fillStyle = "red";
+  ctx.fill();
 
   // move each rect in the balls[] array by its own directionx
+
+  var stop = false;
   for (var i=0;i<balls.length;i++) {
     ball = balls[i];
-    ball.x += ball.vx;
-    ball.y += ball.vy;
 
-    // keep the ball within the bounding box
-    if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-    ball.vy = -ball.vy;
+    // if ball is within hit area, expand hit area, remove ball
+    if (insideHitArea(ball.x, ball.y)) {
+      stop = true;
+      ball.radius = 50;
+      // drawBall(ball.x, ball.y, 50, ball.color);
+      ctx.save();
+      // balls.splice(i, 1);
     }
-    if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-      ball.vx = -ball.vx;
+
+    else {
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+
+      // keep the ball within the bounding box
+      if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+      ball.vy = -ball.vy;
+      }
+      if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+        ball.vx = -ball.vx;
+      }
     }
   }
 
   // draw the balls
   drawBalls();
 
-  // request another frame in the animation loop
-  window.requestAnimationFrame(moveBalls);
+  raf = window.requestAnimationFrame(moveBalls);
+  // if (!stop) {
+  //   // request another frame in the animation loop
+  //   raf = window.requestAnimationFrame(moveBalls);
+  // }
 }
-
 
 function buttonClick(subEvent)
 {
@@ -119,11 +171,9 @@ function buttonClick(subEvent)
     mainEvent.screenX + ") and Y(" + mainEvent.screenY + ")");
 }
 
-
 `LOAD AND PLAY THE GAME`
 
 // start the animation loop
-window.requestAnimationFrame(moveBalls);
-
+raf = window.requestAnimationFrame(moveBalls);
 
 console.log(balls);

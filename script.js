@@ -1,27 +1,12 @@
-// save and restore states of the canvas
-// https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations
-
 `GLOBAL VARIABLES`
 
 var balls = [];
-var coordinates = [
-  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
-  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
-  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
-  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)],
-  [Math.floor(Math.random() * 800),Math.floor(Math.random() * 500)]
-];
-
-var raf;
-
-// queue to store the hit areas
-var queue = [];
-
-var running = false;
-var hitareax = 300;
-var hitareay = 300;
-var hitarear = 50;
-
+var hitAreas = [];
+var scoreBoard = document.getElementById('score');
+var ballsCaptured = document.getElementById('collisions');
+var collisions = 0;
+var collisions_expired = 0;
+var running;
 `HELPER FUNCTIONS`
 
 function getRandomColor() {
@@ -31,6 +16,21 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+function dynamicColors() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return "rgba(" + r + "," + g + "," + b + "," + 0.5 + ")";
+};
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  res = Math.floor(Math.random() * (max - min + 1)) + min;
+  if (res != 0) return res;
+  else return 3;
 }
 
 var myGameArea = {
@@ -47,133 +47,171 @@ var myGameArea = {
     }
 }
 
-startGame();
+// start the game
+function startGame(numBalls) {
+    myGameArea.start();
+    for (var i=0;i<numBalls;i++) {
+      addGamePiece = {
+        x: Math.floor(Math.random() * 800),
+        y: Math.floor(Math.random() * 500),
+        color: getRandomColor(),
+        vx: getRandomIntInclusive(-6, 6),
+        vy: getRandomIntInclusive(-6, 6),
+        radius: 10
+      }
+      balls.push(addGamePiece);
+    }
+}
+
+// draw a ball onto the canvas
+function drawBall(ball) {
+  ctx = myGameArea.context;
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fillStyle = ball.color;
+  ctx.fill();
+}
+
+// add motion to the ball
+var counter = 0;
+function moveBalls() {
+
+  ctx.clearRect(0,0, canvas.width, canvas.height);
+
+  // update coordinates of balls
+  for (var i=0;i<balls.length;i++) {
+    var ball = balls[i];
+
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    // keep the ball within the bounding box
+    if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+    ball.vy = -ball.vy;
+    }
+    if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+      ball.vx = -ball.vx;
+    }
+
+    drawBall(ball);
+  }
+
+  // draw out the hit areas
+  makeHitAreas();
+}
+
+function makeHitAreas() {
+
+  // if no more hit areas, GAME OVER
+  setTimeout(function(){
+
+    if (collisions != 0 && collisions_expired === collisions) {
+      // stop the game
+      clearInterval(running);
+
+      // create popup message
+      var message = document.createElement('div');
+      message.id = "message";
+      var text = document.createElement('div');
+      text.innerText = "You win!";
+      var button = document.createElement('button');
+      button.innerText = "hi";
+      message.appendChild(text);
+      message.appendChild(button);
+      document.body.appendChild(message);
+    }
+  }, 5000);
+
+  for (var i=0;i<hitAreas.length;i++) {
+    var hitArea = hitAreas[i];
+
+    if (hitArea.radius === 50.0) {
+		    hitArea.sizeInt = -.5;
+  	}
+  	if (hitArea.radius < 30) {
+      collisions_expired++;
+  		hitAreas.splice(i, 1);
+  	}
+    else {
+      hitArea.radius += hitArea.sizeInt;
+      drawBall(hitArea); // update size of hit area
+      checkCollision(); // check if any of the balls have collided with the hit area
+    }
+  }
+}
+
+// check if each ball is in any of the hit areas
+function checkCollision() {
+  for (var j=0; j<balls.length;j++) {
+    var ball = balls[j];
+
+    // if collision has occured
+    if (ctx.isPointInPath(ball.x, ball.y)) {
+
+      // update score
+      collisions++;
+      scoreBoard.innerText = "Your score: " + (collisions-1);
+      ballsCaptured.innerText = "Balls Captured: " + (collisions-1);
+      // create another hit area
+      var addhitArea = {
+        x: ball.x,
+        y: ball.y,
+        color: dynamicColors(),
+        sizeInt: 0.5,
+        radius: 30
+      };
+      // add to hitAreas[] array
+      hitAreas.push(addhitArea);
+      // remove ball from array
+      balls.splice(j, 1);
+    }
+  }
+}
+
+var placehitArea = function(e) {
+  // calculate the current mouse position relative to the canvas
+  // using e.client and the offsets
+  var mouseX = e.clientX - canvas.offsetLeft;
+	var mouseY = e.clientY - canvas.offsetTop;
+
+  ctx = myGameArea.context;
+  ctx.beginPath();
+  ctx.arc(mouseX, mouseY, 30, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(127, 255, 0, 0.6)';
+  ctx.fill();
+}
+
+startGame(20);
 
 // extract the canvas
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
-// start the game
-function startGame() {
-    myGameArea.start();
-    for (var i=0;i<coordinates.length;i++) {
-      addGamePiece = new ball(coordinates[i][0], coordinates[i][1], getRandomColor(), 3, 3, 10);
-      balls.push(addGamePiece);
-    }
+canvas.addEventListener('mousemove', placehitArea);
+
+var addhitArea = function(e) {
+  var mouseX = e.clientX - canvas.offsetLeft;
+	var mouseY = e.clientY - canvas.offsetTop;
+
+  var newHitArea = {
+    x: mouseX,
+    y: mouseY,
+    color: 'rgba(127, 255, 0, 0.6)',
+    sizeInt: 0.5,
+    radius: 30
+  };
+
+  hitAreas.push(newHitArea);
+  collisions++;
+  console.log(hitAreas);
+  canvas.removeEventListener('click', addhitArea);
+  canvas.removeEventListener('mousemove', placehitArea);
 }
 
-// ball constructor
-function ball(x, y, color, vx, vy, radius) {
-    this.x = x;
-    this.y = y;
-    this.color = color;
-    this.vx = vx;
-    this.vy = vy;
-    this.radius = radius;
-}
-
-// returns if ball is inside hit area (if there has been a collision)
-function insideHitArea(x, y) {
-  if (Math.sqrt((hitareax-x)*(hitareax-x) + (hitareay-y)*(hitareay-y)) <= hitarear) {
-			return true;
-		}
-	else {
-		return false;
-	}
-}
-
-// draw a ball onto the canvas
-function drawBall(x, y, r, color) {
-  ctx = myGameArea.context;
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, Math.PI * 2, true);
-  ctx.closePath();
-  ctx.fillStyle = color;
-  ctx.fill();
-}
-
-// draw the balls onto the canvas
-function drawBalls() {
-  for (var i=0;i<balls.length;i++) {
-
-    ball = balls[i];
-    ctx = myGameArea.context;
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.fillStyle = ball.color;
-    ctx.fill();
-  }
-}
-
-// add motion to the ball
-function moveBalls() {
-
-  ctx.clearRect(0,0, canvas.width, canvas.height);
-
-  ctx = myGameArea.context;
-  ctx.beginPath();
-  ctx.arc(300, 300, 50, 0, Math.PI * 2, true);
-  ctx.closePath();
-  ctx.fillStyle = "red";
-  ctx.fill();
-
-  ctx = myGameArea.context;
-  ctx.beginPath();
-  ctx.arc(50, 100, 50, 0, Math.PI * 2, true);
-  ctx.closePath();
-  ctx.fillStyle = "red";
-  ctx.fill();
-
-  // move each rect in the balls[] array by its own directionx
-
-  var stop = false;
-  for (var i=0;i<balls.length;i++) {
-    ball = balls[i];
-
-    // if ball is within hit area, expand hit area, remove ball
-    if (insideHitArea(ball.x, ball.y)) {
-      stop = true;
-      ball.radius = 50;
-      // drawBall(ball.x, ball.y, 50, ball.color);
-      ctx.save();
-      // balls.splice(i, 1);
-    }
-
-    else {
-      ball.x += ball.vx;
-      ball.y += ball.vy;
-
-      // keep the ball within the bounding box
-      if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-      ball.vy = -ball.vy;
-      }
-      if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-        ball.vx = -ball.vx;
-      }
-    }
-  }
-
-  // draw the balls
-  drawBalls();
-
-  raf = window.requestAnimationFrame(moveBalls);
-  // if (!stop) {
-  //   // request another frame in the animation loop
-  //   raf = window.requestAnimationFrame(moveBalls);
-  // }
-}
-
-function buttonClick(subEvent)
-{
-    var mainEvent = subEvent ? subEvent : window.event;
-    alert("This button click occurred at: X(" +
-    mainEvent.screenX + ") and Y(" + mainEvent.screenY + ")");
-}
+canvas.addEventListener('click', addhitArea);
 
 `LOAD AND PLAY THE GAME`
 
-// start the animation loop
-raf = window.requestAnimationFrame(moveBalls);
-
-console.log(balls);
+running = setInterval(moveBalls, 30);

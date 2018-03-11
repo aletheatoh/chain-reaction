@@ -4,12 +4,16 @@ var balls = [];
 var hitAreas = [];
 var scoreBoard = document.getElementById('score');
 var ballsCaptured = document.getElementById('collisions');
+var message = document.getElementById('message');
+var button = document.querySelector('button');
 var collisions = 0;
 var collisions_expired = 0;
 var running;
+
 `HELPER FUNCTIONS`
 
-function getRandomColor() {
+//
+function ballColorGenerator() {
   var letters = '0123456789ABCDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
@@ -47,22 +51,6 @@ var myGameArea = {
     }
 }
 
-// start the game
-function startGame(numBalls) {
-    myGameArea.start();
-    for (var i=0;i<numBalls;i++) {
-      addGamePiece = {
-        x: Math.floor(Math.random() * 800),
-        y: Math.floor(Math.random() * 500),
-        color: getRandomColor(),
-        vx: getRandomIntInclusive(-6, 6),
-        vy: getRandomIntInclusive(-6, 6),
-        radius: 10
-      }
-      balls.push(addGamePiece);
-    }
-}
-
 // draw a ball onto the canvas
 function drawBall(ball) {
   ctx = myGameArea.context;
@@ -74,7 +62,6 @@ function drawBall(ball) {
 }
 
 // add motion to the ball
-var counter = 0;
 function moveBalls() {
 
   ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -94,6 +81,7 @@ function moveBalls() {
       ball.vx = -ball.vx;
     }
 
+    // draw out the ball
     drawBall(ball);
   }
 
@@ -189,8 +177,6 @@ startGame(20);
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 
-canvas.addEventListener('mousemove', placehitArea);
-
 var addhitArea = function(e) {
   var mouseX = e.clientX - canvas.offsetLeft;
 	var mouseY = e.clientY - canvas.offsetTop;
@@ -210,8 +196,38 @@ var addhitArea = function(e) {
   canvas.removeEventListener('mousemove', placehitArea);
 }
 
+running = setInterval(moveBalls, 30);
+canvas.addEventListener('mousemove', placehitArea);
 canvas.addEventListener('click', addhitArea);
 
 `LOAD AND PLAY THE GAME`
+var clicked = false;
+// start the game
+function startGame(numBalls) {
+    myGameArea.start();
+    for (var i=0;i<numBalls;i++) {
+      addGamePiece = {
+        x: Math.floor(Math.random() * 800),
+        y: Math.floor(Math.random() * 500),
+        color: ballColorGenerator(),
+        vx: getRandomIntInclusive(-6, 6),
+        vy: getRandomIntInclusive(-6, 6),
+        radius: 10
+      }
+      balls.push(addGamePiece);
+    }
 
-running = setInterval(moveBalls, 30);
+    // var message = document.createElement('div');
+    // message.id = "message";
+    // var text = document.createElement('div');
+    // text.innerText = "Start playing?!";
+    // var button = document.createElement('button');
+    // button.innerText = "Yes";
+    // message.appendChild(text);
+    // message.appendChild(button);
+    // document.body.appendChild(message);
+    // button.addEventListener('click', function() {
+    //   clicked = true;
+    //   document.body.removeChild(message);
+    // });
+}

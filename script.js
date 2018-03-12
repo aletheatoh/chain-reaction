@@ -3,8 +3,15 @@
 var balls = [];
 var hitAreas = [];
 
-var startGameButton = document.getElementById('start-game');
-var instructionsButton = document.getElementById('instructions');
+`DOCUMENT ELEMENTS`
+var navBar = document.querySelector('nav');
+
+// home page buttons
+var startGameButton;
+var instructionsButton;
+var musicButton;
+
+// container: contains 1) player stats, and 2) canvas
 var container = document.getElementById('container');
 var scoreBoard;
 var ballsCaptured;
@@ -23,55 +30,119 @@ var counterPauseResume = 0;
 
 `HELPER FUNCTIONS`
 
+function createHomePage() {
+  var button1 = document.createElement('button');
+  button1.id = "start-game";
+  button1.innerText = "Start Game";
+  startGameButton = button1;
+  navBar.appendChild(startGameButton);
+
+  var button2 = document.createElement('button');
+  button2.id = "instructions";
+  button2.innerText = "Instructions";
+  instructionsButton = button2;
+  navBar.appendChild(instructionsButton);
+
+  var button3 = document.createElement('button');
+  button3.id = "music";
+  button3.innerText = "Music On/Off";
+  musicButton = button3;
+  navBar.appendChild(musicButton);
+}
+
+// blur out a document element
+function blurOut(docElement) {
+  docElement.setAttribute('style', "-webkit-filter: blur(2px); -moz-filter: blur(2px); -o-filter: blur(2px); -ms-filter: blur(2px); filter: blur(2px);");
+}
+
+// remove blur effect
+function removeBlur(docElement) {
+  docElement.setAttribute('style', "-webkit-filter: ''; -moz-filter: ''; -o-filter: ''; -ms-filter: ''; filter: '';");
+}
+
 function pauseResumeGame() {
   // pause game
   if (counterPauseResume % 2 === 0) {
     clearInterval(running);
+    canvas.removeEventListener('mousemove', placehitArea);
+    canvas.removeEventListener('click', addhitArea);
   }
   // resume game
   else if (counterPauseResume % 2 === 1) {
     running = setInterval(moveBalls, 30);
+    canvas.addEventListener('mousemove', placehitArea);
+    canvas.addEventListener('click', addhitArea);
   }
   counterPauseResume++;
 }
 
+// modify home page to game play mode
 function modifyHomePage() {
-  // modify home page to game play mode
-  var buttons = document.querySelectorAll('button');
-  var pause_or_resume = buttons[0];
 
+  // clear home page buttons
+  while (navBar.firstChild) {
+      navBar.removeChild(navBar.firstChild);
+  }
+
+  // pause/resume button
+  var pause_or_resume = document.createElement('button');
   pause_or_resume.setAttribute('class', 'nav-bar');
   pause_or_resume.id = "pause-or-resume";
   pause_or_resume.innerText = "Pause/Resume Game";
   pause_or_resume.addEventListener('click', pauseResumeGame);
-  var exitGame = buttons[1];
-  exitGame.setAttribute('class', 'nav-bar');
-  exitGame.id = "exit-game";
-  exitGame.innerText = "Exit Game";
+  navBar.appendChild(pause_or_resume);
 
-  var instructions = buttons[2];
+  // instructions button
+  var instructions = document.createElement('button');
   instructions.setAttribute('class', 'nav-bar');
   instructions.id = "instructions";
   instructions.innerText = "Instructions";
+  instructions.addEventListener('click', instructions);
+  navBar.appendChild(instructions);
+
+  var exitGame = document.createElement('button');
+  exitGame.setAttribute('class', 'nav-bar');
+  exitGame.id = "exit-game";
+  exitGame.innerText = "Exit Game";
+  exitGame.addEventListener('click', function() {
+    location.reload();
+  });
+  navBar.appendChild(exitGame);
 }
 
 function instructions() {
-
   // blur out the background
-  header.setAttribute('style', "-webkit-filter: blur(2px); -moz-filter: blur(2px); -o-filter: blur(2px); -ms-filter: blur(2px); filter: blur(2px);");
+  blurOut(header);
+
   var instructions = document.createElement('div');
   instructions.id = "instructions-box";
+  instructionsBox = instructions;
+
+  // add game description
   var description = document.createElement('p');
   description.innerText = "Your goal is to place a bomb anywhere on the screen, and capture as many balls as possible. The longer the chain reaction you create, the more points you win!";
-
   instructions.appendChild(description);
-  instructions.appendChild(startGameButton);
+
+  if (running) {
+    blurOut(container);
+  }
+  else {
+    // create back button
+    var back = document.createElement('button');
+    back.innerText = "Back";
+    back.addEventListener('click', function() {
+      location.reload();
+    });
+    instructions.appendChild(back);
+
+    // add start game button
+    var startGameButtonCopy = startGameButton.cloneNode(true);
+    instructions.appendChild(startGameButtonCopy);
+    startGameButtonCopy.addEventListener('click',loadGame);
+  }
   document.body.appendChild(instructions);
 
-  instructionsBox = document.getElementById('instructions-box');
 }
-
-instructionsButton.addEventListener('click', instructions);
 
 function displayPlayerStats() {
   var level = document.createElement('div');
@@ -243,6 +314,7 @@ var placehitArea = function(e) {
 }
 
 'LOAD AND PLAY GAME'
+
 var myGameArea = {
     // function to create canvas and start the game
     canvas : document.createElement("canvas"),
@@ -256,8 +328,6 @@ var myGameArea = {
         bounding_box.appendChild(this.canvas);
     }
 }
-
-startGameButton.addEventListener('click', loadGame);
 
 var addhitArea = function(e) {
   var mouseX = e.clientX - canvas.offsetLeft;
@@ -277,23 +347,39 @@ var addhitArea = function(e) {
   canvas.removeEventListener('mousemove', placehitArea);
 }
 
+createHomePage();
+
+instructionsButton.addEventListener('click', instructions);
+
+startGameButton.addEventListener('click', loadGame);
+
 function loadGame() {
-  header.setAttribute('style', "-webkit-filter: ''; -moz-filter: ''; -o-filter: ''; -ms-filter: ''; filter: '';");
+  // remove all blur effects
+  removeBlur(header);
+  removeBlur(container);
   modifyHomePage();
+
+  // load player stats
   displayPlayerStats();
+
+  // start the game
   startGame(10);
+
   // extract the canvas
   canvas = document.getElementById('myCanvas');
   ctx = canvas.getContext('2d');
+
   canvas.addEventListener('mousemove', placehitArea);
   canvas.addEventListener('click', addhitArea);
+
+  // remove eventlistners
+  if (instructionsBox) {
+    document.body.removeChild(instructionsBox);
+  }
   startGameButton.removeEventListener('click',loadGame);
 }
 // start the game
 function startGame(numBalls) {
-    if (instructionsBox != null) {
-      document.body.removeChild(instructionsBox);
-    }
     myGameArea.start();
     for (var i=0;i<numBalls;i++) {
       addGamePiece = {

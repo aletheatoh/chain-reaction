@@ -2,17 +2,104 @@
 
 var balls = [];
 var hitAreas = [];
-var scoreBoard = document.getElementById('score');
-var ballsCaptured = document.getElementById('collisions');
-var message = document.getElementById('message');
-var button = document.querySelector('button');
+
+var startGameButton = document.getElementById('start-game');
+var instructionsButton = document.getElementById('instructions');
+var container = document.getElementById('container');
+var scoreBoard;
+var ballsCaptured;
+var header = document.querySelector('header');
+var instructionsBox;
+
+var level = 0;
 var collisions = 0;
 var collisions_expired = 0;
 var running;
 
+var canvas;
+var ctx;
+
+var counterPauseResume = 0;
+
 `HELPER FUNCTIONS`
 
-//
+function pauseResumeGame() {
+  // pause game
+  if (counterPauseResume % 2 === 0) {
+    clearInterval(running);
+  }
+  // resume game
+  else if (counterPauseResume % 2 === 1) {
+    running = setInterval(moveBalls, 30);
+  }
+  counterPauseResume++;
+}
+
+function modifyHomePage() {
+  // modify home page to game play mode
+  var buttons = document.querySelectorAll('button');
+  var pause_or_resume = buttons[0];
+
+  pause_or_resume.setAttribute('class', 'nav-bar');
+  pause_or_resume.id = "pause-or-resume";
+  pause_or_resume.innerText = "Pause/Resume Game";
+  pause_or_resume.addEventListener('click', pauseResumeGame);
+  var exitGame = buttons[1];
+  exitGame.setAttribute('class', 'nav-bar');
+  exitGame.id = "exit-game";
+  exitGame.innerText = "Exit Game";
+
+  var instructions = buttons[2];
+  instructions.setAttribute('class', 'nav-bar');
+  instructions.id = "instructions";
+  instructions.innerText = "Instructions";
+}
+
+function instructions() {
+
+  // blur out the background
+  header.setAttribute('style', "-webkit-filter: blur(2px); -moz-filter: blur(2px); -o-filter: blur(2px); -ms-filter: blur(2px); filter: blur(2px);");
+  var instructions = document.createElement('div');
+  instructions.id = "instructions-box";
+  var description = document.createElement('p');
+  description.innerText = "Your goal is to place a bomb anywhere on the screen, and capture as many balls as possible. The longer the chain reaction you create, the more points you win!";
+
+  instructions.appendChild(description);
+  instructions.appendChild(startGameButton);
+  document.body.appendChild(instructions);
+
+  instructionsBox = document.getElementById('instructions-box');
+}
+
+instructionsButton.addEventListener('click', instructions);
+
+function displayPlayerStats() {
+  var level = document.createElement('div');
+  level.setAttribute('class', 'player-stats');
+  level.id = 'level';
+  level.innerText = "Level ";
+  container.appendChild(level);
+
+  var score = document.createElement('div');
+  score.setAttribute('class', 'player-stats');
+  score.id = 'score';
+  score.innerText = "Your Score: ";
+  container.appendChild(score);
+
+  var collisions = document.createElement('div');
+  collisions.setAttribute('class', 'player-stats');
+  collisions.id = 'collisions';
+  collisions.innerText = "Balls Captured";
+
+  // insert above canvas
+  container.insertBefore(collisions, container.childNodes[0]);
+  container.insertBefore(score, container.childNodes[0]);
+  container.insertBefore(level, container.childNodes[0]);
+
+  scoreBoard = document.getElementById('score');
+  ballsCaptured = document.getElementById('collisions');
+}
+
 function ballColorGenerator() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -35,20 +122,6 @@ function getRandomIntInclusive(min, max) {
   res = Math.floor(Math.random() * (max - min + 1)) + min;
   if (res != 0) return res;
   else return 3;
-}
-
-var myGameArea = {
-    // function to create canvas and start the game
-    canvas : document.createElement("canvas"),
-    start : function() {
-        this.canvas.width = 800;
-        this.canvas.height = 500;
-        this.canvas.id = "myCanvas";
-        this.context = this.canvas.getContext("2d");
-        // add to the bounding box
-        var bounding_box = document.querySelector("#bounding-box");
-        bounding_box.appendChild(this.canvas);
-    }
 }
 
 // draw a ball onto the canvas
@@ -93,11 +166,9 @@ function makeHitAreas() {
 
   // if no more hit areas, GAME OVER
   setTimeout(function(){
-
     if (collisions != 0 && collisions_expired === collisions) {
       // stop the game
       clearInterval(running);
-
       // create popup message
       var message = document.createElement('div');
       message.id = "message";
@@ -171,11 +242,22 @@ var placehitArea = function(e) {
   ctx.fill();
 }
 
-startGame(20);
+'LOAD AND PLAY GAME'
+var myGameArea = {
+    // function to create canvas and start the game
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 800;
+        this.canvas.height = 500;
+        this.canvas.id = "myCanvas";
+        this.context = this.canvas.getContext("2d");
+        // add to the bounding box
+        var bounding_box = document.querySelector("#bounding-box");
+        bounding_box.appendChild(this.canvas);
+    }
+}
 
-// extract the canvas
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
+startGameButton.addEventListener('click', loadGame);
 
 var addhitArea = function(e) {
   var mouseX = e.clientX - canvas.offsetLeft;
@@ -191,19 +273,27 @@ var addhitArea = function(e) {
 
   hitAreas.push(newHitArea);
   collisions++;
-  console.log(hitAreas);
   canvas.removeEventListener('click', addhitArea);
   canvas.removeEventListener('mousemove', placehitArea);
 }
 
-running = setInterval(moveBalls, 30);
-canvas.addEventListener('mousemove', placehitArea);
-canvas.addEventListener('click', addhitArea);
-
-`LOAD AND PLAY THE GAME`
-var clicked = false;
+function loadGame() {
+  header.setAttribute('style', "-webkit-filter: ''; -moz-filter: ''; -o-filter: ''; -ms-filter: ''; filter: '';");
+  modifyHomePage();
+  displayPlayerStats();
+  startGame(10);
+  // extract the canvas
+  canvas = document.getElementById('myCanvas');
+  ctx = canvas.getContext('2d');
+  canvas.addEventListener('mousemove', placehitArea);
+  canvas.addEventListener('click', addhitArea);
+  startGameButton.removeEventListener('click',loadGame);
+}
 // start the game
 function startGame(numBalls) {
+    if (instructionsBox != null) {
+      document.body.removeChild(instructionsBox);
+    }
     myGameArea.start();
     for (var i=0;i<numBalls;i++) {
       addGamePiece = {
@@ -216,18 +306,5 @@ function startGame(numBalls) {
       }
       balls.push(addGamePiece);
     }
-
-    // var message = document.createElement('div');
-    // message.id = "message";
-    // var text = document.createElement('div');
-    // text.innerText = "Start playing?!";
-    // var button = document.createElement('button');
-    // button.innerText = "Yes";
-    // message.appendChild(text);
-    // message.appendChild(button);
-    // document.body.appendChild(message);
-    // button.addEventListener('click', function() {
-    //   clicked = true;
-    //   document.body.removeChild(message);
-    // });
+    running = setInterval(moveBalls, 30);
 }

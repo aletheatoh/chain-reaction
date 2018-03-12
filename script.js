@@ -26,7 +26,8 @@ window.onload = function() {
   var passed = true;
 
   var levelNumBalls = [5,10,20,30,50];
-  var passLevel = [1,3,10,20,40];
+  // var passLevel = [1,3,10,20,40];
+  var passLevel = [1,1,1,1,1];
   // need to reset each round
   var balls = [];
   var hitAreas = [];
@@ -253,8 +254,6 @@ window.onload = function() {
     loadGame();
   }
 
-  var yesClicked = false;
-
   var proceedNextLevel = function() {
     if (!messageShown) {
       messageShown = true;
@@ -267,18 +266,33 @@ window.onload = function() {
       // if passed round, proceed to next level
       if ( (collisions-1) >= passLevel[levelNum-1]) {
         passed = true;
-        text.innerText = "Well Done! Proceed to the next level?";
-        message.appendChild(text);
-        var yes = document.createElement('button');
-        yes.innerText = "Next Level";
-        // have to wait for everything to load first
-        yes.addEventListener('click', function() {
-          yesClicked = true;
-          // setTimeout(modifyNextLevel,4000);
-          homePage();
-          loadGame();
-        });
-        message.appendChild(yes);
+
+        // completed all levels
+        if (levelNum === 5) {
+          text.innerText = "Well Done! You have completed all rounds! Play Again?";
+          message.appendChild(text);
+          var yes = document.createElement('button');
+          yes.innerText = "Play Again";
+          yes.addEventListener('click', function() {
+            levelNum = 0;
+            homePage();
+            loadGame();
+          });
+          message.appendChild(yes);
+        }
+        else {
+          // advance to the next level
+          text.innerText = "Well Done! Proceed to the next level?";
+          message.appendChild(text);
+          var yes = document.createElement('button');
+          yes.innerText = "Next Level";
+          // have to wait for everything to load first
+          yes.addEventListener('click', function() {
+            homePage();
+            loadGame();
+          });
+          message.appendChild(yes);
+        }
       }
       // if did not pass round, ask if try again
       else {
@@ -316,13 +330,13 @@ window.onload = function() {
     var score = document.createElement('div');
     score.setAttribute('class', 'player-stats');
     score.id = 'score';
-    score.innerText = "Your Score: ";
+    score.innerText = "Your score: 0";
     container.appendChild(score);
 
     var collisions = document.createElement('div');
     collisions.setAttribute('class', 'player-stats');
     collisions.id = 'collisions';
-    collisions.innerText = "Balls Captured: ";
+    collisions.innerText = "Balls Captured: 0";
 
     // insert above canvas
     container.insertBefore(collisions, container.childNodes[0]);

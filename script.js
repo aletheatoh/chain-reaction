@@ -23,9 +23,10 @@ window.onload = function() {
 
   var startLevelButton;
   var levelPromptDiv;
+  var passed = true;
 
   var levelNumBalls = [5,10,20,30,50];
-  var passLevel = [2,3,10,20,40];
+  var passLevel = [1,3,10,20,40];
   // need to reset each round
   var balls = [];
   var hitAreas = [];
@@ -262,20 +263,37 @@ window.onload = function() {
       message.id = "message";
 
       var text = document.createElement('p');
-      text.innerText = "Well Done! Proceed to the next level?";
-      message.appendChild(text);
 
-      var yes = document.createElement('button');
-      yes.innerText = "Next Level";
-      // have to wait for everything to load first
-      yes.addEventListener('click', function() {
-        yesClicked = true;
-        // setTimeout(modifyNextLevel,4000);
-        homePage();
-
-        loadGame();
-      });
-      message.appendChild(yes);
+      // if passed round, proceed to next level
+      if ( (collisions-1) >= passLevel[levelNum-1]) {
+        passed = true;
+        text.innerText = "Well Done! Proceed to the next level?";
+        message.appendChild(text);
+        var yes = document.createElement('button');
+        yes.innerText = "Next Level";
+        // have to wait for everything to load first
+        yes.addEventListener('click', function() {
+          yesClicked = true;
+          // setTimeout(modifyNextLevel,4000);
+          homePage();
+          loadGame();
+        });
+        message.appendChild(yes);
+      }
+      // if did not pass round, ask if try again
+      else {
+        passed = false;
+        text.innerText = "Failed to pass round. Try again?";
+        message.appendChild(text);
+        var try_again = document.createElement('button');
+        try_again.innerText = "Try Again";
+        try_again.addEventListener('click', function() {
+          console.log(passLevel[levelNum-1]);
+          homePage();
+          loadGame();
+        });
+        message.appendChild(try_again);
+      }
 
       var no = document.createElement('button');
       no.innerText = "Exit Game";
@@ -315,7 +333,7 @@ window.onload = function() {
     ballsCaptured = document.getElementById('collisions');
   }
 
-  `animation functions`
+  // `animation functions`
   // draw a ball onto the canvas
   function drawBall(ball) {
     ctx = myGameArea.context;
@@ -455,7 +473,11 @@ window.onload = function() {
   createHomePage();
 
   function loadGame() {
-    levelNum++; // increment level
+
+    if (passed) {
+      levelNum++; // increment level
+      passed = false;
+    }
 
     // reset variables
     balls = [];
@@ -501,7 +523,7 @@ window.onload = function() {
     prompt.id = "level-prompt";
     levelPromptDiv = prompt;
     var text = document.createElement('p');
-    text.innerText = "Capture the balls!";
+    text.innerText = "Capture " + passLevel[levelNum-1] + " out of " + levelNumBalls[levelNum-1] + " balls!";
     prompt.appendChild(text);
 
     document.body.appendChild(prompt);

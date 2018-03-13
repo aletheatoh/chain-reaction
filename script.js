@@ -105,6 +105,16 @@ window.onload = function() {
     description.innerText = "Place the target anywhere on the screen, and capture as many balls as possible. The larger the chain reaction you create, the more points you win!";
     instructions.appendChild(description);
 
+    var demodiv = document.createElement('div');
+    demodiv.id = "demodiv";
+    var demo = document.createElement('video');
+    demo.id = "demo";
+    demo.setAttribute('src', 'demo.mov');
+    demodiv.appendChild(demo);
+    instructions.appendChild(demodiv);
+    demo.autoplay = true;
+    demo.load();
+
     if (running) {
       blurOut(container);
       clearInterval(running);

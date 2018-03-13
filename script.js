@@ -36,7 +36,7 @@ window.onload = function() {
   var collisions_expired = 0;
   var running;
   var messageShown = false;
-  // var gameover = false;
+  var gameover = false;
 
   var canvas;
   var ctx;
@@ -143,30 +143,48 @@ window.onload = function() {
 
   // resumes game from instructions mode
   function resumeGame() {
+
     removeBlur(header);
     removeBlur(container);
-    running = setInterval(moveBalls, 30);
-    canvas.addEventListener('mousemove', placehitArea);
-    canvas.addEventListener('click', addhitArea);
-    document.body.removeChild(instructionsBox);
-  }
 
-  function pauseResumeGame() {
-    // pause game
-    if (counterPauseResume % 2 === 0) {
-      gamePaused = true;
-      clearInterval(running);
+    // game is over
+    if (gameover) {
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
     }
-    // resume game
-    else if (counterPauseResume % 2 === 1) {
-      gamePaused = false;
+    else {
       running = setInterval(moveBalls, 30);
       canvas.addEventListener('mousemove', placehitArea);
       canvas.addEventListener('click', addhitArea);
     }
-    counterPauseResume++;
+    document.body.removeChild(instructionsBox);
+  }
+
+  function pauseResumeGame() {
+
+    // game is over
+    if (gameover) {
+      canvas.removeEventListener('mousemove', placehitArea);
+      canvas.removeEventListener('click', addhitArea);
+    }
+
+    else {
+      // pause game
+      if (counterPauseResume % 2 === 0) {
+        gamePaused = true;
+        clearInterval(running);
+        canvas.removeEventListener('mousemove', placehitArea);
+        canvas.removeEventListener('click', addhitArea);
+      }
+      // resume game
+      else if (counterPauseResume % 2 === 1) {
+        gamePaused = false;
+        running = setInterval(moveBalls, 30);
+        canvas.addEventListener('mousemove', placehitArea);
+        canvas.addEventListener('click', addhitArea);
+      }
+      counterPauseResume++;
+    }
   }
 
   function instructions() {
@@ -268,6 +286,7 @@ window.onload = function() {
       // if passed round, proceed to next level
       if ( (collisions-1) >= passLevel[levelNum-1]) {
         passed = true;
+        gameover = true;
 
         // completed all levels
         if (levelNum === 5) {
@@ -502,7 +521,7 @@ window.onload = function() {
     balls = [];
     hitAreas = [];
     messageShown = false;
-    // gameover = false;
+    gameover = false;
     collisions = 0;
     collisions_expired = 0;
     // remove all blur effects

@@ -82,8 +82,6 @@ window.onload = function() {
     docElement.setAttribute('style', "-webkit-filter: ''; -moz-filter: ''; -o-filter: ''; -ms-filter: ''; filter: '';");
   }
 
-  // functional helper functions for home page / playing mode
-
   // loads the home page
   function createHomePage() {
     header.style.margin = "200px auto";
@@ -143,7 +141,6 @@ window.onload = function() {
 
   // resumes game from instructions mode
   function resumeGame() {
-
     removeBlur(header);
     removeBlur(container);
 
@@ -161,7 +158,6 @@ window.onload = function() {
   }
 
   function pauseResumeGame() {
-
     // game is over
     if (gameover) {
       canvas.removeEventListener('mousemove', placehitArea);
@@ -257,7 +253,6 @@ window.onload = function() {
   }
 
   function modifyNextLevel() {
-
     // remove old player-stats bar
     var replace = document.querySelectorAll('.player-stats');
     for (var i=0; i<replace.length;i++) {
@@ -275,14 +270,14 @@ window.onload = function() {
   }
 
   var proceedNextLevel = function() {
-
     if (!messageShown) {
       messageShown = true;
       // create popup message
       var message = document.createElement('div');
       message.id = "message";
 
-      var text = document.createElement('p');
+      var text = document.createElement('div');
+      text.id = "proceed-next-level-text";
 
       // if passed round, proceed to next level
       if ( (collisions-1) >= passLevel[levelNum-1]) {
@@ -291,6 +286,7 @@ window.onload = function() {
 
         // completed all levels
         if (levelNum === 5) {
+          message.style.height = "130px";
           text.innerText = "Well Done! You have completed all rounds! Play Again?";
           message.appendChild(text);
           var yes = document.createElement('button');
@@ -480,7 +476,7 @@ window.onload = function() {
     canvas : document.createElement("canvas"),
     start : function() {
       this.canvas.width = 800;
-      this.canvas.height = 500;
+      this.canvas.height = 450;
       this.canvas.id = "myCanvas";
       this.context = this.canvas.getContext("2d");
       // add to the bounding box
@@ -545,7 +541,7 @@ window.onload = function() {
     for (var i=0;i<numBalls;i++) {
       addGamePiece = {
         x: Math.floor(Math.random() * 800),
-        y: Math.floor(Math.random() * 500),
+        y: Math.floor(Math.random() * 450),
         color: ballColorGenerator(),
         vx: getRandomIntInclusive(-6, 6),
         vy: getRandomIntInclusive(-6, 6),
@@ -564,8 +560,9 @@ window.onload = function() {
     var prompt = document.createElement('div');
     prompt.id = "level-prompt";
     levelPromptDiv = prompt;
-    var text = document.createElement('p');
+    var text = document.createElement('div');
     text.innerText = "Capture " + passLevel[levelNum-1] + " out of " + levelNumBalls[levelNum-1] + " balls!";
+    text.id = "level-prompt-text";
     prompt.appendChild(text);
 
     document.body.appendChild(prompt);

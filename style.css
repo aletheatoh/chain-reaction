@@ -1,25 +1,16 @@
-html,body {
-  height: 100%;
-}
-
 body {
   text-align: center;
   margin: 0 auto;
+  background-color: rgb(255, 212, 128);
+  font-family: "Yanone Kaffeesatz";
+  font-size: 20px;
 }
 
 h1 {
   text-align: center;
   font-family: "Bungee";
-  font-size: 50px;
+  font-size: 45px;
   margin: 5px auto;
-}
-
-#container {
-  text-align: center;
-}
-
-#bounding-box {
-  text-align: center;
 }
 
 #myCanvas {
@@ -34,8 +25,7 @@ h1 {
   width: 20%;
 }
 
-#message, #instructions-box, #level-prompt {
-  text-align: center;
+ #level-prompt {
   position:absolute;
   left:0;
   right:0;
@@ -44,22 +34,69 @@ h1 {
   margin:auto;
   border: 3px solid #d3d3d3;
   padding: 10px;
-  width: 400px;
+  width: 300px;
   height: 100px;
   background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+#level-prompt-text, #proceed-next-level-text  {
+  margin: 12px;
+}
+#message {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  border: 3px solid #d3d3d3;
+  padding: 10px;
+  width: 300px;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+#instructions-box {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin: auto;
+  border: 3px solid #d3d3d3;
+  padding: 12px;
+  width: 400px;
+  height: 150px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
 }
 
 #header {
-  /* position:absolute;
-  left:0;
-  right:0;
-  top: 0;
-  bottom:0;
-  margin: auto; */
-  text-align: center;
+  /* text-align: center; */
   border: 3px solid #d3d3d3;
-  padding: 10px;
+  padding: 8px;
   width: 500px;
-  height: 100px;
-  margin: 0 auto;
+  height: 110px;
+  margin: 10px auto;
 }
+
+button {
+  background-color: #f4511e;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 10px 15px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin: 4px 4px;
+  opacity: 0.7;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: "Yanone Kaffeesatz";
+  border-radius: 10px;
+}
+
+button:hover {opacity: 1}

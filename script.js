@@ -483,7 +483,7 @@ window.onload = function() {
     header.appendChild(credits);
 
     background = document.createElement('canvas');
-    background.width = "1200";
+    background.width = "1400";
     background.height = "800";
     background.id = "background";
     document.body.insertBefore(background,header);

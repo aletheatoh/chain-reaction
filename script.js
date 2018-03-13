@@ -442,7 +442,7 @@ window.onload = function() {
     var newHitArea = {
       x: mouseX,
       y: mouseY,
-      color: 'rgba(127, 255, 0, 0.6)',
+      color: 'rgb(255, 69, 0)',
       sizeInt: 0.5,
       radius: 30
     };
@@ -583,7 +583,7 @@ window.onload = function() {
     // get the corresponding # of balls to the level number
     levelPrompt();
   }
-//
+
   function createBalls(numBalls) {
     for (var i=0;i<numBalls;i++) {
       addGamePiece = {
@@ -662,22 +662,6 @@ window.onload = function() {
     gameMusic = new sound('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
     gameMusic.loop = true;
     gameMusic.play();
-  }
-
-  function test() {
-    var img1 = new Image();
-    img1.src = 'img/Target-icon.png';
-    context.drawImage(img1, 0, 0);
-    //draw a box over the top
-    context.fillStyle = "rgba(200, 0, 0, 0.5)";
-    context.fillRect(0, 0, 500, 500);
-    img1.onload = function () {
-    //draw background image
-    context.drawImage(img1, 0, 0);
-    //draw a box over the top
-    context.fillStyle = "rgba(200, 0, 0, 0.5)";
-    context.fillRect(0, 0, 500, 500);
-    };
   }
 
   createHomePage();

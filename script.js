@@ -6,7 +6,7 @@ window.onload = function() {
   // `DOCUMENT ELEMENTS`
   var navBar = document.querySelector('nav');
   var container = document.getElementById('container');
-  var header = document.querySelector('header');
+  var header = document.querySelector('#header');
   var boundingBox = document.querySelector('#bounding-box');
 
   // home page buttons
@@ -86,6 +86,7 @@ window.onload = function() {
 
   // loads the home page
   function createHomePage() {
+    header.style.margin = "200px auto";
     var button1 = document.createElement('button');
     button1.id = "start-game";
     button1.innerText = "Start Game";
@@ -105,7 +106,6 @@ window.onload = function() {
     button3.innerText = "Music On/Off";
     musicButton = button3;
     navBar.appendChild(musicButton);
-
   }
 
   // modify home page to game play mode
@@ -214,6 +214,7 @@ window.onload = function() {
     }
     else {
       // create back button
+      header.style.margin = "200px auto";
       var backButton = document.createElement('button');
       backButton.innerText = "Back";
       backButton.addEventListener('click', homePage);
@@ -525,10 +526,13 @@ window.onload = function() {
     collisions = 0;
     collisions_expired = 0;
     // remove all blur effects
+
+    console.log(header.style.margin);
     removeBlur(header);
     removeBlur(container);
     modifyHomePage();
 
+    header.style.margin = "0 auto";
     myGameArea.start(); // create the canvas
     createBalls(levelNumBalls[levelNum-1]);
 
@@ -536,7 +540,7 @@ window.onload = function() {
     // get the corresponding # of balls to the level number
     levelPrompt();
   }
-
+//
   function createBalls(numBalls) {
     for (var i=0;i<numBalls;i++) {
       addGamePiece = {

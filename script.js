@@ -213,6 +213,7 @@ window.onload = function() {
   function homePage() {
     removeBlur(header);
     removeBlur(document.body);
+
     if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
     // remove nav bar
     while (navBar.firstChild) {
@@ -255,6 +256,7 @@ window.onload = function() {
   }
 
   var proceedNextLevel = function() {
+
     if (!messageShown) {
       messageShown = true;
       // create popup message
@@ -302,7 +304,6 @@ window.onload = function() {
         var try_again = document.createElement('button');
         try_again.innerText = "Try Again";
         try_again.addEventListener('click', function() {
-          console.log(passLevel[levelNum-1]);
           homePage();
           loadGame();
         });
@@ -316,7 +317,9 @@ window.onload = function() {
       });
       message.appendChild(no);
 
-      document.body.appendChild(message);
+      setTimeout(function() {
+        document.body.appendChild(message);
+      }, 500);
     }
   }
 
@@ -385,27 +388,26 @@ window.onload = function() {
   function makeHitAreas() {
     // if no more hit areas, GAME OVER
     if (collisions != 0 && collisions_expired === collisions) {
-      setTimeout(function(){
-        // gameover = true;
-        clearInterval(running);
-        proceedNextLevel();
-      },3000);
+      clearInterval(running);
+      proceedNextLevel();
     }
 
-    for (var i=0;i<hitAreas.length;i++) {
-      var hitArea = hitAreas[i];
+    else {
+      for (var i=0;i<hitAreas.length;i++) {
+        var hitArea = hitAreas[i];
 
-      if (hitArea.radius === 50.0) {
-        hitArea.sizeInt = -.5;
-      }
-      if (hitArea.radius < 30) {
-        collisions_expired++;
-        hitAreas.splice(i, 1);
-      }
-      else {
-        hitArea.radius += hitArea.sizeInt;
-        drawBall(hitArea); // update size of hit area
-        checkCollision(); // check if any of the balls have collided with the hit area
+        if (hitArea.radius === 50.0) {
+          hitArea.sizeInt = -.5;
+        }
+        if (hitArea.radius < 30) {
+          collisions_expired++;
+          hitAreas.splice(i, 1);
+        }
+        else {
+          hitArea.radius += hitArea.sizeInt;
+          drawBall(hitArea); // update size of hit area
+          checkCollision(); // check if any of the balls have collided with the hit area
+        }
       }
     }
   }
@@ -487,6 +489,9 @@ window.onload = function() {
   createHomePage();
 
   function loadGame() {
+    if (instructionsBox != null && instructionsBox.parentNode != null) {
+      document.body.removeChild(instructionsBox);
+    }
 
     if (passed) {
       levelNum++; // increment level

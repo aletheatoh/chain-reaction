@@ -1,109 +1,17 @@
 
 window.onload = function() {
 
-  `GLOBAL VARIABLES`
-
-  // `DOCUMENT ELEMENTS`
-  var navBar = document.querySelector('nav');
-  var container = document.getElementById('container');
-  var header = document.querySelector('#header');
-  var boundingBox = document.querySelector('#bounding-box');
-
-  // home page buttons
-  var startGameButton;
-  var instructionsButton;
-  var musicButton;
-
-  // container: contains 1) player stats, and 2) canvas
-  var scoreBoard;
-  var ballsCaptured;
-  var instructionsBox;
-
-  // global variables for playing mode
-
-  var startLevelButton;
-  var levelPromptDiv;
-  var passed = true;
-
-  var levelNumBalls = [5,10,20,30,50];
-  // var passLevel = [1,3,10,20,40];
-  var passLevel = [1,1,1,1,1];
-  // need to reset each round
-  var balls = [];
-  var hitAreas = [];
-  var levelNum = 0;
-  var collisions = 0;
-  var collisions_expired = 0;
-  var running;
-  var messageShown = false;
-  var gameover = false;
-
-  var canvas;
-  var ctx;
-
-  var counterPauseResume = 0;
-
-  `HELPER FUNCTIONS`
-
-  // generates colors with transparencies
-  function ballColorGenerator() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+  // switch on/off music
+  function musicOnOff() {
+    if (counterMusic%2==0) {
+      gameMusic.stop();
+      musicOn = false;
     }
-    return color;
-  }
-
-  // generates solid colors
-  function dynamicColors() {
-    var r = Math.floor(Math.random() * 255);
-    var g = Math.floor(Math.random() * 255);
-    var b = Math.floor(Math.random() * 255);
-    return "rgba(" + r + "," + g + "," + b + "," + 0.5 + ")";
-  }
-
-  // generates random integer in a range (inclusive)
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    res = Math.floor(Math.random() * (max - min + 1)) + min;
-    if (res != 0) return res;
-    else return 3;
-  }
-
-  // blur out a document element
-  function blurOut(docElement) {
-    docElement.setAttribute('style', "-webkit-filter: blur(2px); -moz-filter: blur(2px); -o-filter: blur(2px); -ms-filter: blur(2px); filter: blur(2px);");
-  }
-
-  // remove blur effect on a document element
-  function removeBlur(docElement) {
-    docElement.setAttribute('style', "-webkit-filter: ''; -moz-filter: ''; -o-filter: ''; -ms-filter: ''; filter: '';");
-  }
-
-  // loads the home page
-  function createHomePage() {
-    header.style.margin = "200px auto";
-    var button1 = document.createElement('button');
-    button1.id = "start-game";
-    button1.innerText = "Start Game";
-    startGameButton = button1;
-    navBar.appendChild(startGameButton);
-    startGameButton.addEventListener('click', loadGame);
-
-    var button2 = document.createElement('button');
-    button2.id = "instructions";
-    button2.innerText = "Instructions";
-    instructionsButton = button2;
-    navBar.appendChild(instructionsButton);
-    instructionsButton.addEventListener('click', instructions);
-
-    var button3 = document.createElement('button');
-    button3.id = "music";
-    button3.innerText = "Music On/Off";
-    musicButton = button3;
-    navBar.appendChild(musicButton);
+    else if (counterMusic%2==1) {
+      gameMusic.play();
+      musicOn = true;
+    }
+    counterMusic++;
   }
 
   // modify home page to game play mode
@@ -192,8 +100,9 @@ window.onload = function() {
     instructionsBox = instructions;
 
     // add game description
-    var description = document.createElement('p');
-    description.innerText = "Your goal is to place a bomb anywhere on the screen, and capture as many balls as possible. The longer the chain reaction you create, the more points you win!";
+    var description = document.createElement('div');
+    description.id = "description";
+    description.innerText = "Place the target anywhere on the screen, and capture as many balls as possible. The larger the chain reaction you create, the more points you win!";
     instructions.appendChild(description);
 
     if (running) {
@@ -235,6 +144,9 @@ window.onload = function() {
       navBar.removeChild(navBar.firstChild);
     }
 
+    // remove credits
+    if (creditsBox != null && creditsBox.parentNode != null) header.removeChild(creditsBox);
+
     // remove old player-stats bar
     var replace = document.querySelectorAll('.player-stats');
     for (var i=0; i<replace.length;i++) {
@@ -247,8 +159,11 @@ window.onload = function() {
       document.body.removeChild(messages[i]);
     }
 
-    // remove canvas
-    if (canvas != null) boundingBox.removeChild(canvas);
+    // rest background
+    clearInterval(anotherRunning);
+    context.clearRect(0,0, background.width, background.height);
+
+    // create home page
     createHomePage();
   }
 
@@ -286,8 +201,12 @@ window.onload = function() {
 
         // completed all levels
         if (levelNum === 5) {
-          message.style.height = "130px";
-          text.innerText = "Well Done! You have completed all rounds! Play Again?";
+          if (musicOn) {
+            var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
+            winSound.play();
+          }
+          message.style.height = "115px";
+          text.innerText = "Congratulations, you made it through all 5 levels! Wanna play again?";
           message.appendChild(text);
           var yes = document.createElement('button');
           yes.innerText = "Play Again";
@@ -300,7 +219,13 @@ window.onload = function() {
         }
         else {
           // advance to the next level
-          text.innerText = "Well Done! Proceed to the next level?";
+
+          // play sound
+          if (musicOn) {
+            var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
+            winSound.play();
+          }
+          text.innerText = "Well Done! Advance to Level " + (levelNum+1) + "?";
           message.appendChild(text);
           var yes = document.createElement('button');
           yes.innerText = "Next Level";
@@ -314,8 +239,12 @@ window.onload = function() {
       }
       // if did not pass round, ask if try again
       else {
+        if (musicOn) {
+          var loseSound = new sound("sound-effects/Crowd Boo 3-SoundBible.com-595364990.mp3");
+          loseSound.play();
+        }
         passed = false;
-        text.innerText = "Failed to pass round. Try again?";
+        text.innerText = "Failed to pass Level " + levelNum + ". Try again?";
         message.appendChild(text);
         var try_again = document.createElement('button');
         try_again.innerText = "Try Again";
@@ -335,7 +264,7 @@ window.onload = function() {
 
       setTimeout(function() {
         document.body.appendChild(message);
-      }, 500);
+      }, 700);
     }
   }
 
@@ -344,6 +273,7 @@ window.onload = function() {
     level.setAttribute('class', 'player-stats');
     level.id = 'level';
     level.innerText = "Level " + levelNum;
+    // level.style.fontWeight = "bold";
     container.appendChild(level);
 
     var score = document.createElement('div');
@@ -418,6 +348,10 @@ window.onload = function() {
         if (hitArea.radius < 30) {
           collisions_expired++;
           hitAreas.splice(i, 1);
+          if (musicOn) {
+            var popSound = new sound("sound-effects/Bounce-SoundBible.com-12678623.mp3");
+            popSound.play();
+          }
         }
         else {
           hitArea.radius += hitArea.sizeInt;
@@ -432,9 +366,12 @@ window.onload = function() {
   function checkCollision() {
     for (var j=0; j<balls.length;j++) {
       var ball = balls[j];
-
       // if collision has occured
       if (ctx.isPointInPath(ball.x, ball.y)) {
+        if (musicOn) {
+          var hitSound = new sound("sound-effects/Blop-Mark_DiAngelo-79054334.mp3");
+          hitSound.play();
+        }
         // update score
         collisions++;
         scoreBoard.innerText = "Your score: " + (collisions-1);
@@ -462,11 +399,14 @@ window.onload = function() {
     var mouseY = e.clientY - canvas.offsetTop;
 
     ctx = myGameArea.context;
-    ctx.beginPath();
-    ctx.arc(mouseX, mouseY, 30, 0, Math.PI * 2);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(127, 255, 0, 0.6)';
-    ctx.fill();
+    // ctx.beginPath();
+    // ctx.arc(mouseX, mouseY, 30, 0, Math.PI * 2);
+    // ctx.closePath();
+    // ctx.fillStyle = 'rgba(127, 255, 0, 0.6)';
+    // ctx.fill();
+    var img = document.querySelector('#target');
+    ctx.drawImage(img, mouseX, mouseY, 30, 30);
+
   }
 
   'LOAD AND PLAY GAME'
@@ -502,12 +442,110 @@ window.onload = function() {
     canvas.removeEventListener('mousemove', placehitArea);
   }
 
-  createHomePage();
+  function createHomePage() {
+    header.style.margin = "200px auto 10px auto";
+    header.style.height = "140px";
+    var button1 = document.createElement('button');
+    button1.id = "start-game";
+    button1.innerText = "Start Game";
+    startGameButton = button1;
+    navBar.appendChild(startGameButton);
+    startGameButton.addEventListener('click', loadGame);
+
+    var button2 = document.createElement('button');
+    button2.id = "instructions";
+    button2.innerText = "Instructions";
+    instructionsButton = button2;
+    navBar.appendChild(instructionsButton);
+    instructionsButton.addEventListener('click', instructions);
+
+    var button3 = document.createElement('button');
+    button3.id = "music";
+    button3.innerText = "Music On/Off";
+    musicButton = button3;
+    navBar.appendChild(musicButton);
+    musicButton.addEventListener('click',musicOnOff);
+
+    var credits = document.createElement('div');
+    creditsBox = credits;
+    credits.id = "credits";
+    credits.innerText = "Created by Alethea Toh";
+    header.appendChild(credits);
+
+    background = document.createElement('canvas');
+    background.width = "1200";
+    background.height = "800";
+    background.id = "background";
+    document.body.insertBefore(background,header);
+
+    context = background.getContext('2d');
+    context.clearRect(0,0, background.width, background.height);
+
+    createBallsModified(50);
+    anotherRunning = setInterval(moveBallsModified, 30);
+  }
+
+  // add motion to the ball
+  function moveBallsModified() {
+
+    context.clearRect(0,0, background.width, background.height);
+
+    // update coordinates of balls
+    for (var i=0;i<backgroundBalls.length;i++) {
+      var ball = backgroundBalls[i];
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+      // keep the ball within the bounding box
+      if (ball.y + ball.vy > background.height || ball.y + ball.vy < 0) {
+        ball.vy = -ball.vy;
+      }
+      if (ball.x + ball.vx > background.width || ball.x + ball.vx < 0) {
+        ball.vx = -ball.vx;
+      }
+      // draw out the ball
+      drawBallModified(ball);
+    }
+  }
+
+  function drawBallModified(ball) {
+    context.beginPath();
+    context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    context.closePath();
+    context.fillStyle = ball.color;
+    context.fill();
+  }
+
+  function createBallsModified(numBalls) {
+    for (var i=0;i<numBalls;i++) {
+      addGamePiece = {
+        x: Math.floor(Math.random() * 800),
+        y: Math.floor(Math.random() * 450),
+        color: ballColorGenerator(),
+        vx: getRandomIntInclusive(-6, 6),
+        vy: getRandomIntInclusive(-6, 6),
+        radius: 10
+      }
+      backgroundBalls.push(addGamePiece);
+    }
+  }
 
   function loadGame() {
+
+    clearInterval(anotherRunning);
+
+    // remove background
+    if (background != null) document.body.removeChild(background);
+
     if (instructionsBox != null && instructionsBox.parentNode != null) {
       document.body.removeChild(instructionsBox);
     }
+
+    // remove credits
+    if (creditsBox != null && creditsBox.parentNode != null) header.removeChild(creditsBox);
+
+    // remove github ad
+    var github = document.querySelector('#github');
+    if (github != null) document.body.removeChild(github);
 
     if (passed) {
       levelNum++; // increment level
@@ -523,7 +561,6 @@ window.onload = function() {
     collisions_expired = 0;
     // remove all blur effects
 
-    console.log(header.style.margin);
     removeBlur(header);
     removeBlur(container);
     modifyHomePage();
@@ -560,6 +597,12 @@ window.onload = function() {
     var prompt = document.createElement('div');
     prompt.id = "level-prompt";
     levelPromptDiv = prompt;
+    var levelNumHeading = document.createElement('div');
+    levelNumHeading.id = "level-num-heading";
+    levelNumHeading.innerText = "Level " + levelNum;
+    levelNumHeading.style.fontWeight = "bold";
+
+    prompt.appendChild(levelNumHeading);
     var text = document.createElement('div');
     text.innerText = "Capture " + passLevel[levelNum-1] + " out of " + levelNumBalls[levelNum-1] + " balls!";
     text.id = "level-prompt-text";
@@ -582,7 +625,7 @@ window.onload = function() {
     removeBlur(container);
 
     // remove level levelPrompt
-    document.body.removeChild(levelPromptDiv);
+    if (levelPromptDiv != null) document.body.removeChild(levelPromptDiv);
 
     // extract the canvas
     canvas = document.getElementById('myCanvas');
@@ -600,7 +643,34 @@ window.onload = function() {
     if (instructionsBox != null && instructionsBox.parentNode != null) {
       document.body.removeChild(instructionsBox);
     }
+
     startGameButton.removeEventListener('click',loadGame);
     startLevelButton.removeEventListener('click',startGame);
   }
+
+  if (musicOn) {
+    gameMusic = new sound('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
+    gameMusic.loop = true;
+    gameMusic.play();
+  }
+
+  function test() {
+    var img1 = new Image();
+    img1.src = 'img/Target-icon.png';
+    context.drawImage(img1, 0, 0);
+    //draw a box over the top
+    context.fillStyle = "rgba(200, 0, 0, 0.5)";
+    context.fillRect(0, 0, 500, 500);
+    img1.onload = function () {
+    //draw background image
+    context.drawImage(img1, 0, 0);
+    //draw a box over the top
+    context.fillStyle = "rgba(200, 0, 0, 0.5)";
+    context.fillRect(0, 0, 500, 500);
+    };
+  }
+
+  createHomePage();
+
+
 }

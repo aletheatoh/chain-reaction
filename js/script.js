@@ -50,14 +50,22 @@ window.onload = function() {
     removeBlur(header);
     removeBlur(container);
 
+    console.log(running);
+
     // game is over
     if (gameover) {
       clearInterval(running);
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
     }
+    else {
+      if (!running || levelNum === 1) {
+        canvas.addEventListener('mousemove', placehitArea);
+        canvas.addEventListener('click', addhitArea);
+      }
+    }
 
-    if (! levelPromptShown) running = setInterval(moveBalls, 30);
+    if (!levelPromptShown) running = setInterval(moveBalls, 30);
 
     if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
 
@@ -93,6 +101,7 @@ window.onload = function() {
     }
   }
 
+  // ask player if he/she really wants to exit the game
   function sureExit() {
     // blur out the background
     blurOut(header);
@@ -162,11 +171,9 @@ window.onload = function() {
     if (running || levelNum === 1) {
       blurOut(container);
       clearInterval(running);
+      canvas.removeEventListener('mousemove', placehitArea);
+      canvas.removeEventListener('click', addhitArea);
 
-      if (levelNum !== 1) {
-        canvas.removeEventListener('mousemove', placehitArea);
-        canvas.removeEventListener('click', addhitArea);
-      }
       // add resume game button
       var resumeGameButton = document.createElement('button');
       resumeGameButton.innerText = "Resume Game";
@@ -237,13 +244,15 @@ window.onload = function() {
   var proceedNextLevel = function() {
     if (!messageShown) {
       messageShown = true;
+      blurOut(header);
+      blurOut(container);
       // create popup message
       var message = document.createElement('div');
       message.id = "message";
 
       var text = document.createElement('div');
       text.id = "proceed-next-level-text";
-      totalScore += (collisions-1); // update total score
+
       // if passed round, proceed to next level
       if ( (collisions-1) >= passLevel[levelNum-1]) {
         passed = true;
@@ -255,7 +264,7 @@ window.onload = function() {
             var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
             winSound.play();
           }
-          text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ".Wanna play again?";
+          text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ". Wanna play again?";
           message.style.height = "135px";
           message.appendChild(text);
           var yes = document.createElement('button');
@@ -330,21 +339,28 @@ window.onload = function() {
     var score = document.createElement('div');
     score.setAttribute('class', 'player-stats');
     score.id = 'score';
-    score.innerText = "Your score: 0";
+    scoreBoard = score;
+    score.innerText = "Level score: " + roundScore;
     container.appendChild(score);
+
+    var score_all_levels = document.createElement('div');
+    score_all_levels.setAttribute('class', 'player-stats');
+    score_all_levels.id = 'score-all-levels';
+    totalScoreBoard = score_all_levels;
+    score_all_levels.innerText = "Total score: " + totalScore;
+    container.appendChild(score_all_levels);
 
     var collisions = document.createElement('div');
     collisions.setAttribute('class', 'player-stats');
     collisions.id = 'collisions';
-    collisions.innerText = "Balls Captured: 0";
+    ballsCaptured = collisions;
+    collisions.innerText = "Balls captured: 0";
 
     // insert above canvas
     container.insertBefore(collisions, container.childNodes[0]);
+    container.insertBefore(score_all_levels, container.childNodes[0]);
     container.insertBefore(score, container.childNodes[0]);
     container.insertBefore(level, container.childNodes[0]);
-
-    scoreBoard = document.getElementById('score');
-    ballsCaptured = document.getElementById('collisions');
   }
 
   // `animation functions`
@@ -427,8 +443,13 @@ window.onload = function() {
         }
         // update score
         collisions++;
-        scoreBoard.innerText = "Your score: " + (collisions-1);
-        ballsCaptured.innerText = "Balls Captured: " + (collisions-1);
+        roundScore += (collisions-1)*10;
+        scoreBoard.innerText = "Level score: " + roundScore;
+        // update total score
+        totalScore += (collisions-1)*10;
+        totalScoreBoard.innerText = "Total score: " + totalScore;
+        // update balls captured
+        ballsCaptured.innerText = "Balls captured: " + (collisions-1);
         // create another hit area
         var addhitArea = {
           x: ball.x,
@@ -604,6 +625,7 @@ window.onload = function() {
     hitAreaPlaced = false;
     balls = [];
     hitAreas = [];
+    roundScore = 0;
     messageShown = false;
     gameover = false;
     collisions = 0;

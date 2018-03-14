@@ -31,10 +31,12 @@ var ctx;
 var running; // setInterval turn on/off
 var balls = [];
 var hitAreas = [];
-var totalScore = 0;
+var totalScore = 0; // score for all levels
+var roundScore = 0; // score for a given round
 
 // player stats div
 var scoreBoard;
+var totalScoreBoard;
 var ballsCaptured;
 
 // global variables for playing mode

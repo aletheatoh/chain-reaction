@@ -119,7 +119,7 @@ a {
 /* Player Stats: Level #, Score, Balls Captured */
 .player-stats {
   display: inline-block;
-  width: 20%;
+  width: 15%;
 }
 
 #level-prompt {

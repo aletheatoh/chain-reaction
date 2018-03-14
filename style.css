@@ -192,3 +192,10 @@ a {
   font-size: 22px;
   font-weight: bold;
 }
+
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 24px;
+  }
+}

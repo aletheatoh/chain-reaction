@@ -80,7 +80,6 @@ window.onload = function() {
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
     }
-
     else {
       // pause game
       if (counterPauseResume % 2 === 0) {

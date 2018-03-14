@@ -179,12 +179,15 @@ a {
   border-radius: 10px;
 }
 
-/* browser compatibility */
-/* @media (max-width: 800px) {
-#bounding-box {
-overflow: hidden;
+/* #test {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  animation-name: example;
+  animation-duration: 2s;
 }
-#myCanvas {
-overflow: inherit;
-}
+
+@keyframes example {
+    from {transform: translate(0, 0)}
+    to {transform: translate(0, -15px)}
 } */

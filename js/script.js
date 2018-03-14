@@ -47,8 +47,8 @@ window.onload = function() {
   // resumes game from instructions mode
   function resumeGame() {
     clearInterval(running);
-    removeBlur(header);
-    removeBlur(container);
+    if (header != null) removeBlur(header);
+    if (container != null) removeBlur(container);
 
     console.log(running);
 
@@ -103,8 +103,8 @@ window.onload = function() {
   // ask player if he/she really wants to exit the game
   function sureExit() {
     // blur out the background
-    blurOut(header);
-    blurOut(container);
+    if (header != null) blurOut(header);
+    if (container != null) blurOut(container);
     clearInterval(running);
 
     if (canvas != null) {
@@ -145,7 +145,7 @@ window.onload = function() {
 
   function instructions() {
     // blur out the background
-    blurOut(header);
+    if (header != null) blurOut(header);
 
     var instructions = document.createElement('div');
     instructions.id = "instructions-box";
@@ -168,7 +168,7 @@ window.onload = function() {
     demo.load();
 
     if (running || levelNum === 1) {
-      blurOut(container);
+      if (container != null) blurOut(container);
       clearInterval(running);
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
@@ -197,8 +197,8 @@ window.onload = function() {
 
   // home page
   function homePage() {
-    removeBlur(header);
-    removeBlur(document.body);
+    if (header != null) removeBlur(header);
+    if (document.body != null) removeBlur(document.body);
 
     if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
     // remove nav bar
@@ -243,8 +243,8 @@ window.onload = function() {
   var proceedNextLevel = function() {
     if (!messageShown) {
       messageShown = true;
-      blurOut(header);
-      blurOut(container);
+      if (header != null) blurOut(header);
+      if (container != null) blurOut(container);
       // create popup message
       var message = document.createElement('div');
       message.id = "message";
@@ -362,6 +362,9 @@ window.onload = function() {
     container.insertBefore(level, container.childNodes[0]);
   }
 
+  // function displayScore() {
+  //
+  // }
   // `animation functions`
   // draw a ball onto the canvas
   function drawBall(ball) {
@@ -375,7 +378,6 @@ window.onload = function() {
 
   // add motion to the ball
   function moveBalls() {
-
     if (ctx != null) ctx.clearRect(0,0, canvas.width, canvas.height);
 
     if (canvas != null) {
@@ -631,8 +633,8 @@ window.onload = function() {
     collisions_expired = 0;
     // remove all blur effects
 
-    removeBlur(header);
-    removeBlur(container);
+    if (header != null) removeBlur(header);
+    if (container != null) removeBlur(container);
     modifyHomePage();
 
     header.style.margin = "0 auto";
@@ -661,8 +663,8 @@ window.onload = function() {
   function levelPrompt() {
     // blur out background
     levelPromptShown = true;
-    blurOut(header);
-    blurOut(container);
+    if (header != null) blurOut(header);
+    if (container!= null) blurOut(container);
 
     // add message
     var prompt = document.createElement('div');
@@ -692,8 +694,8 @@ window.onload = function() {
   // start the game
   function startGame() {
     // remove blur effects
-    removeBlur(header);
-    removeBlur(container);
+    if (header != null) removeBlur(header);
+    if (container != null) removeBlur(container);
     clearInterval(running);
 
     // remove level levelPrompt

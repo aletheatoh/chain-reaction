@@ -2,28 +2,26 @@
 
 // creates sound effect
 function sound(src) {
-this.sound = document.createElement("audio");
-this.sound.src = src;
-this.sound.setAttribute("preload", "auto");
-this.sound.setAttribute("controls", "none");
-this.sound.style.display = "none";
-document.body.appendChild(this.sound);
-this.play = function(){
-    this.sound.play();
-}
-this.stop = function(){
-    this.sound.pause();
-}
-}
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function() {
+      this.sound.play();
+    }
+  this.stop = function() {
+      this.sound.pause();
+    }
+  }
 
 // generates solid colors for the balls
 function ballColorGenerator() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+  var r = Math.floor(Math.random() * 255);
+  var g = Math.floor(Math.random() * 255);
+  var b = Math.floor(Math.random() * 255);
+  return "rgb(" + r + "," + g + "," + b + ")";
 }
 
 // generates colors with transparencies

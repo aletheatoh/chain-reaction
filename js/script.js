@@ -157,7 +157,7 @@ window.onload = function() {
     demodiv.id = "demodiv";
     var demo = document.createElement('video');
     demo.id = "demo";
-    demo.setAttribute('src', 'demo.mov');
+    demo.setAttribute('src', 'media/demo.mov');
     demodiv.appendChild(demo);
     instructions.appendChild(demodiv);
     demo.autoplay = true;
@@ -480,6 +480,8 @@ window.onload = function() {
     start : function() {
       this.canvas.width = 800;
       this.canvas.height = 450;
+      this.canvas.style.width = "800px";
+      this.canvas.style.height = "450px";
       this.canvas.id = "myCanvas";
       this.context = this.canvas.getContext("2d");
       // add to the bounding box
@@ -537,8 +539,8 @@ window.onload = function() {
     header.appendChild(credits);
 
     background = document.createElement('canvas');
-    background.width = "1400";
-    background.height = "800";
+    background.width = window.innerWidth;
+    background.height = window.innerHeight;
     background.id = "background";
     document.body.insertBefore(background,header);
 

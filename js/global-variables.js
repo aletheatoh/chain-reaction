@@ -18,7 +18,7 @@ var creditsBox;
 // level num and corresponding # of balls + passing bar
 var levelNum = 0;
 var levelNumBalls = [5,10,20,30,50];
-var passLevel = [1,3,8,15,35];
+var passLevel = [1,3,8,15,40];
 
 // home page buttons
 var startGameButton;

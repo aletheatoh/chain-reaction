@@ -126,8 +126,7 @@ a {
   position:absolute;
   left:0;
   right:0;
-  top:0;
-  bottom:0;
+  top:250px;
   margin:auto;
   border: 3px solid #d3d3d3;
   padding: 8px;
@@ -191,11 +190,4 @@ a {
   color: red;
   font-size: 22px;
   font-weight: bold;
-}
-
-
-@media (max-width: 400px) {
-  h1 {
-    font-size: 24px;
-  }
 }

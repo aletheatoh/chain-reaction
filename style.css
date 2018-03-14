@@ -3,7 +3,7 @@ body {
   margin: 0 auto;
   background-color: rgba(255, 212, 128, 0.8);
   /* background-color: #FFE4C4; */
-  font-family: "Yanone Kaffeesatz";
+  font-family: "Yanone Kaffeesatz", sans-serif;
   font-size: 20px;
   letter-spacing: 0.5px;
   overflow:hidden;
@@ -30,7 +30,7 @@ body {
 }
 
 h1 {
-  font-family: "Bungee";
+  font-family: "Bungee", sans-serif;
   font-size: 45px;
   margin: 5px auto;
 }
@@ -56,7 +56,7 @@ button {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  font-family: "Yanone Kaffeesatz";
+  font-family: "Yanone Kaffeesatz", sans-serif;
   border-radius: 10px;
 }
 
@@ -192,27 +192,3 @@ a {
   font-size: 22px;
   font-weight: bold;
 }
-
-/* #add-score-popup {
-  position: absolute;
-  z-index: 2;
-  left: 100px;
-  top: 100px; */
-  /* -webkit-animation: moving 5s;
-  animation: moving 5s; */
-  /* left: 100px;
-  top: 100px;
-  animation-name: example;
-  animation-duration: 2s; */
-/* } */
-
-/* #add-score-popup {
-  position: relative;
-  -webkit-animation: moving 5s infinite;
-  animation: moving 5s infinite;
-} */
-
-/* @keyframes moving {
-    from {transform: translateY(0px);}
-    to {transform: translateY(200px);}
-} */

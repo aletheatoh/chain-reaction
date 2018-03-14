@@ -54,3 +54,16 @@ function blurOut(docElement) {
 function removeBlur(docElement) {
   docElement.setAttribute('style', "-webkit-filter: ''; -moz-filter: ''; -o-filter: ''; -ms-filter: ''; filter: '';");
 }
+
+// switch on/off music
+function musicOnOff() {
+  if (counterMusic%2==0) {
+    gameMusic.stop();
+    musicOn = false;
+  }
+  else if (counterMusic%2==1) {
+    gameMusic.play();
+    musicOn = true;
+  }
+  counterMusic++;
+}

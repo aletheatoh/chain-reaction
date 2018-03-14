@@ -1,18 +1,5 @@
 window.onload = function() {
 
-  // switch on/off music
-  function musicOnOff() {
-    if (counterMusic%2==0) {
-      gameMusic.stop();
-      musicOn = false;
-    }
-    else if (counterMusic%2==1) {
-      gameMusic.play();
-      musicOn = true;
-    }
-    counterMusic++;
-  }
-
   // modify home page to game play mode
   function modifyHomePage() {
     // clear home page buttons
@@ -50,8 +37,6 @@ window.onload = function() {
     if (header != null) removeBlur(header);
     if (container != null) removeBlur(container);
 
-    console.log(gameover);
-    console.log(running);
     // game is over
     if (gameover) {
       clearInterval(running);

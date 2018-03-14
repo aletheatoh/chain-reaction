@@ -41,9 +41,8 @@ window.onload = function() {
     exitGame.setAttribute('class', 'nav-bar');
     exitGame.id = "exit-game";
     exitGame.innerText = "Exit Game";
-    exitGame.addEventListener('click', function() {
-      location.reload();
-    });
+    exitGame.addEventListener('click', sureExit);
+    exitGameButton = exitGame;
     navBar.appendChild(exitGame);
   }
 
@@ -62,7 +61,10 @@ window.onload = function() {
       canvas.addEventListener('mousemove', placehitArea);
       canvas.addEventListener('click', addhitArea);
     }
-    document.body.removeChild(instructionsBox);
+
+    if (instructionsBox != null) document.body.removeChild(instructionsBox);
+
+    if (exitGameBox != null) document.body.removeChild(exitGameBox);
   }
 
   function pauseResumeGame() {
@@ -89,6 +91,40 @@ window.onload = function() {
       }
       counterPauseResume++;
     }
+  }
+
+  function sureExit() {
+    // blur out the background
+    blurOut(header);
+    blurOut(container);
+    clearInterval(running);
+    canvas.removeEventListener('mousemove', placehitArea);
+    canvas.removeEventListener('click', addhitArea);
+
+    var exitGameDiv = document.createElement('div');
+    exitGameDiv.id = "exit-game-box";
+    exitGameBox = exitGameDiv;
+
+    var ask = document.createElement('div');
+    ask.id = "exit-game-ask";
+    ask.innerText = "Are you sure you want to quit?";
+    exitGameBox.appendChild(ask);
+
+    // add resume game button
+    var resumeGameButton = document.createElement('button');
+    resumeGameButton.innerText = "Resume Game";
+    resumeGameButton.addEventListener('click',resumeGame);
+    exitGameBox.appendChild(resumeGameButton);
+
+    // add exit game button
+    var exitGame = document.createElement('button');
+    exitGame.innerText = "Exit Game";
+    exitGame.addEventListener('click', function() {
+      location.reload();
+    });
+    exitGameBox.appendChild(exitGame);
+
+    document.body.appendChild(exitGameBox);
   }
 
   function instructions() {
@@ -614,7 +650,7 @@ window.onload = function() {
 
     prompt.appendChild(levelNumHeading);
     var text = document.createElement('div');
-    text.innerText = "Capture " + passLevel[levelNum-1] + " out of " + levelNumBalls[levelNum-1] + " balls!";
+    text.innerText = "Capture at least " + passLevel[levelNum-1] + " out of " + levelNumBalls[levelNum-1] + " balls!";
     text.id = "level-prompt-text";
     prompt.appendChild(text);
 

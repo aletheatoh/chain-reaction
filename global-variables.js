@@ -10,12 +10,15 @@ var boundingBox = document.querySelector('#bounding-box');
 var startGameButton;
 var instructionsButton;
 var musicButton;
+var exitGameButton;
 
 // container: contains 1) player stats, and 2) canvas
 var scoreBoard;
 var ballsCaptured;
 var instructionsBox;
 var creditsBox;
+
+var exitGameBox;
 
 // global variables for playing mode
 var startLevelButton;

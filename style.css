@@ -88,6 +88,21 @@ a {
   border-radius: 10px;
 }
 
+#exit-game-box {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  border: 3px solid #d3d3d3;
+  padding: 8px;
+  width: 300px;
+  height: 90px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
 #message {
   position:absolute;
   left:0;
@@ -117,11 +132,7 @@ a {
   margin: 5px auto 8px auto;
 }
 
-#description {
-  margin: 12px;
-}
-
-#proceed-next-level-text {
+#exit-game-ask, #description, #proceed-next-level-text {
   margin: 12px;
 }
 

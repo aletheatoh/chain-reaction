@@ -1,4 +1,5 @@
 window.onload = function() {
+
   // switch on/off music
   function musicOnOff() {
     if (counterMusic%2==0) {
@@ -270,7 +271,6 @@ window.onload = function() {
         }
         else {
           // advance to the next level
-
           // play sound
           if (musicOn) {
             var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");

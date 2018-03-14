@@ -1,6 +1,6 @@
 # Chain Reaction
 
-A web game built using the Canvas API in HTML5.
+A web game built using the Canvas API in HTML5. <a href="https://aletheatoh.github.io/chain-reaction/">Click here</a> for a demo!
 
 ## How to Play the Game
 

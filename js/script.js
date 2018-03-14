@@ -50,8 +50,8 @@ window.onload = function() {
     if (header != null) removeBlur(header);
     if (container != null) removeBlur(container);
 
+    console.log(gameover);
     console.log(running);
-
     // game is over
     if (gameover) {
       clearInterval(running);
@@ -59,10 +59,8 @@ window.onload = function() {
       canvas.removeEventListener('click', addhitArea);
     }
     else {
-      if (!running || levelNum === 1) {
-        canvas.addEventListener('mousemove', placehitArea);
-        canvas.addEventListener('click', addhitArea);
-      }
+      canvas.addEventListener('mousemove', placehitArea);
+      canvas.addEventListener('click', addhitArea);
     }
 
     if (!levelPromptShown) running = setInterval(moveBalls, 30);
@@ -362,9 +360,10 @@ window.onload = function() {
     container.insertBefore(level, container.childNodes[0]);
   }
 
-  // function displayScore() {
-  //
-  // }
+  function displayScore(score) {
+    addScoreDiv.innerText = "+ " + score;
+  }
+
   // `animation functions`
   // draw a ball onto the canvas
   function drawBall(ball) {
@@ -444,6 +443,7 @@ window.onload = function() {
         }
         // update score
         collisions++;
+        displayScore((collisions-1)*10);
         roundScore += (collisions-1)*10;
         scoreBoard.innerText = "Level score: " + roundScore;
         // update total score
@@ -602,6 +602,8 @@ window.onload = function() {
   }
 
   function loadGame() {
+    addScoreDiv.innerText = "";
+
     clearInterval(anotherRunning);
     // remove background
     if (background != null) document.body.removeChild(background);

@@ -179,15 +179,40 @@ a {
   border-radius: 10px;
 }
 
-/* #test {
-  position: absolute;
-  left: 100px;
-  top: 100px;
-  animation-name: example;
-  animation-duration: 2s;
+#add-score-popup {
+  position:absolute;
+  z-index: 2;
+  left:0;
+  right:0;
+  top:185px;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  color: red;
+  font-size: 22px;
+  font-weight: bold;
 }
 
-@keyframes example {
-    from {transform: translate(0, 0)}
-    to {transform: translate(0, -15px)}
+/* #add-score-popup {
+  position: absolute;
+  z-index: 2;
+  left: 100px;
+  top: 100px; */
+  /* -webkit-animation: moving 5s;
+  animation: moving 5s; */
+  /* left: 100px;
+  top: 100px;
+  animation-name: example;
+  animation-duration: 2s; */
+/* } */
+
+/* #add-score-popup {
+  position: relative;
+  -webkit-animation: moving 5s infinite;
+  animation: moving 5s infinite;
+} */
+
+/* @keyframes moving {
+    from {transform: translateY(0px);}
+    to {transform: translateY(200px);}
 } */

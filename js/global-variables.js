@@ -38,6 +38,7 @@ var roundScore = 0; // score for a given round
 var scoreBoard;
 var totalScoreBoard;
 var ballsCaptured;
+var addScoreDiv = document.querySelector('#add-score-popup');
 
 // global variables for playing mode
 var startLevelButton;

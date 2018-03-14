@@ -46,14 +46,12 @@ window.onload = function() {
 
   // resumes game from instructions mode
   function resumeGame() {
-    console.log(hitAreaPlaced);
     clearInterval(running);
     removeBlur(header);
     removeBlur(container);
 
     // game is over
     if (gameover) {
-      console.log("here");
       clearInterval(running);
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
@@ -466,8 +464,7 @@ window.onload = function() {
     // ctx.fillStyle = 'rgba(127, 255, 0, 0.6)';
     // ctx.fill();
     var img = document.querySelector('#target');
-    ctx.drawImage(img, mouseX, mouseY, 30, 30);
-
+    ctx.drawImage(img, mouseX-15, mouseY-15, 30, 30);
   }
 
   'LOAD AND PLAY GAME'
@@ -718,6 +715,8 @@ window.onload = function() {
     startLevelButton.removeEventListener('click',startGame);
   }
 
+  `TIME TO LOAD EVERYTHING!!!`
+
   if (musicOn) {
     gameMusic = new sound('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
     gameMusic.loop = true;
@@ -725,4 +724,5 @@ window.onload = function() {
   }
 
   createHomePage();
+
 }

@@ -57,3 +57,5 @@ var messageShown = false;
 var gameover = false;
 var levelPromptShown = false;
 var counterPauseResume = 0;
+
+var speed = 30;

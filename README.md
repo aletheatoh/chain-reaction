@@ -1,7 +1,6 @@
 # Chain Reaction
 
-<p>A web game built using the Canvas API in HTML5.<p>
-<p><a href="https://aletheatoh.github.io/chain-reaction/" target="_blank">Click here</a> for a demo!</p>
+A web game built using the Canvas API in HTML5. <a href="https://aletheatoh.github.io/chain-reaction/" target="_blank">Click here</a> for a demo!
 
 ## How to Play the Game
 
@@ -11,9 +10,6 @@
 Place the target anywhere on the canvas, and capture as many balls as possible. At any given level, you need to capture a minimum number of balls in order to advance to the next level.
 
 The score increment starts with 10, and increases by a multiple of 10 with each successive collision. The larger the chain reaction you create, the more points you score!
-
-## Creator
-Alethea Toh
 
 ## Built with
 - HTML5

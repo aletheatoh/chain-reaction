@@ -290,14 +290,16 @@ function startGame() {
 }
 
 `TIME TO LOAD EVERYTHING!!!`
-window.onload = function() {
 
-  if (musicOn) {
-    gameMusic = new sound('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
-    gameMusic.loop = true;
-    gameMusic.play();
+document.addEventListener('DOMContentLoaded',function(){
+  window.onload = function() {
+
+    if (musicOn) {
+      gameMusic = new sound('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
+      gameMusic.loop = true;
+      gameMusic.play();
+    }
+
+    createHomePage();
   }
-
-  createHomePage();
-
-}
+});

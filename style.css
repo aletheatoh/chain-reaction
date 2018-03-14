@@ -126,7 +126,8 @@ a {
   position:absolute;
   left:0;
   right:0;
-  top:250px;
+  top:0;
+  bottom:0;
   margin:auto;
   border: 3px solid #d3d3d3;
   padding: 8px;

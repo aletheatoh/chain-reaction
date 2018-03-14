@@ -25,6 +25,7 @@ var startLevelButton;
 var levelPromptDiv;
 var passed = true;
 var musicOn = true;
+var hitAreaPlaced = false;
 
 // for background
 var backgroundBalls = [];
@@ -43,6 +44,7 @@ var collisions_expired = 0;
 var running;
 var messageShown = false;
 var gameover = false;
+var levelPromptShown = false;
 
 var canvas;
 var ctx;

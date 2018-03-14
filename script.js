@@ -48,21 +48,20 @@ window.onload = function() {
 
   // resumes game from instructions mode
   function resumeGame() {
+    console.log(hitAreaPlaced);
+    clearInterval(running);
     removeBlur(header);
     removeBlur(container);
 
     // game is over
     if (gameover) {
+      console.log("here");
+      clearInterval(running);
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
     }
-    else {
-      running = setInterval(moveBalls, 30);
-      if (levelNum !== 1) {
-        canvas.addEventListener('mousemove', placehitArea);
-        canvas.addEventListener('click', addhitArea);
-      }
-    }
+
+    if (! levelPromptShown) running = setInterval(moveBalls, 30);
 
     if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
 
@@ -73,6 +72,7 @@ window.onload = function() {
     clearInterval(running);
     // game is over
     if (gameover) {
+      clearInterval(running);
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
     }
@@ -88,6 +88,7 @@ window.onload = function() {
       // resume game
       else if (counterPauseResume % 2 === 1) {
         gamePaused = false;
+        console.log(levelPromptDiv);
         running = setInterval(moveBalls, 30);
         canvas.addEventListener('mousemove', placehitArea);
         canvas.addEventListener('click', addhitArea);
@@ -101,8 +102,10 @@ window.onload = function() {
     blurOut(header);
     blurOut(container);
     clearInterval(running);
-    canvas.removeEventListener('mousemove', placehitArea);
-    canvas.removeEventListener('click', addhitArea);
+    if (canvas != null) {
+      canvas.removeEventListener('mousemove', placehitArea);
+      canvas.removeEventListener('click', addhitArea);
+    }
 
     var exitGameDiv = document.createElement('div');
     exitGameDiv.id = "exit-game-box";
@@ -116,7 +119,13 @@ window.onload = function() {
     // add resume game button
     var resumeGameButton = document.createElement('button');
     resumeGameButton.innerText = "Resume Game";
-    resumeGameButton.addEventListener('click',resumeGame);
+    resumeGameButton.addEventListener('click',function(){
+      if (levelPromptDiv !== null && levelPromptDiv.parentNode != null) {
+        document.body.removeChild(levelPromptDiv);
+        levelPrompt();
+      }
+      else resumeGame();
+    });
     exitGameBox.appendChild(resumeGameButton);
 
     // add exit game button
@@ -168,6 +177,7 @@ window.onload = function() {
       resumeGameButton.addEventListener('click',resumeGame);
       instructions.appendChild(resumeGameButton);
     }
+
     else {
       // create back button
       header.style.margin = "200px auto";
@@ -479,6 +489,7 @@ window.onload = function() {
   }
 
   var addhitArea = function(e) {
+    hitAreaPlaced = true;
     var mouseX = e.clientX - canvas.offsetLeft;
     var mouseY = e.clientY - canvas.offsetTop;
 
@@ -606,6 +617,7 @@ window.onload = function() {
     }
 
     // reset variables
+    hitAreaPlaced = false;
     balls = [];
     hitAreas = [];
     messageShown = false;
@@ -643,6 +655,7 @@ window.onload = function() {
 
   function levelPrompt() {
     // blur out background
+    levelPromptShown = true;
     blurOut(header);
     blurOut(container);
 
@@ -679,7 +692,10 @@ window.onload = function() {
     clearInterval(running);
 
     // remove level levelPrompt
-    if (levelPromptDiv != null) document.body.removeChild(levelPromptDiv);
+    if (levelPromptShown) document.body.removeChild(levelPromptDiv);
+    levelPromptShown = false;
+
+    if (exitGameBox != null && exitGameBox.parentNode != null) document.body.removeChild(exitGameBox);
 
     // extract the canvas
     canvas = document.getElementById('myCanvas');

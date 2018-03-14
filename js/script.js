@@ -1,6 +1,5 @@
 
 window.onload = function() {
-
   // switch on/off music
   function musicOnOff() {
     if (counterMusic%2==0) {
@@ -20,7 +19,6 @@ window.onload = function() {
     while (navBar.firstChild) {
       navBar.removeChild(navBar.firstChild);
     }
-
     // pause/resume button
     var pause_or_resume = document.createElement('button');
     pause_or_resume.setAttribute('class', 'nav-bar');

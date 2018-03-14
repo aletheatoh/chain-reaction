@@ -35,6 +35,13 @@ h1 {
   margin: 5px auto;
 }
 
+/* 'Created by Alethea' */
+#credits {
+  font-size: 18px;
+  padding-top: 5px;
+  margin: 5px auto 8px auto;
+}
+
 /* Buttons */
 button {
   background-color: #f4511e;
@@ -57,6 +64,11 @@ button:hover {
   opacity: 1
 }
 
+button:focus, button:active {
+  outline: none;
+  border: none;
+}
+
 /* demo video for instructions */
 #demo {
   width: 300px;
@@ -67,8 +79,8 @@ button:hover {
 
 #target {
   margin-left: auto;
-	margin-right: auto;
-	display: block;
+  margin-right: auto;
+  display: block;
 }
 
 /* View Game Code On GitHub */
@@ -94,6 +106,7 @@ a {
   margin-top: 80px;
 }
 
+/* Game Canvas - Playing Mode */
 #myCanvas {
   position: relative;
   margin-top: 40;
@@ -139,17 +152,11 @@ a {
   border-radius: 10px;
 }
 
-#credits {
-  font-size: 18px;
-  padding-top: 5px;
-  margin: 0;
-}
-
 #level-num-heading {
   margin: 2px;
 }
 
-#credits, #level-prompt-text {
+#level-prompt-text {
   margin: 5px auto 8px auto;
 }
 
@@ -173,10 +180,10 @@ a {
 }
 
 /* @media (max-width: 800px) {
-  #bounding-box {
-    overflow: hidden;
-  }
-  #myCanvas {
-    overflow: inherit;
-  }
+#bounding-box {
+overflow: hidden;
+}
+#myCanvas {
+overflow: inherit;
+}
 } */

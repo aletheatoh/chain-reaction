@@ -58,16 +58,19 @@ window.onload = function() {
     }
     else {
       running = setInterval(moveBalls, 30);
-      canvas.addEventListener('mousemove', placehitArea);
-      canvas.addEventListener('click', addhitArea);
+      if (levelNum !== 1) {
+        canvas.addEventListener('mousemove', placehitArea);
+        canvas.addEventListener('click', addhitArea);
+      }
     }
 
-    if (instructionsBox != null) document.body.removeChild(instructionsBox);
+    if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
 
-    if (exitGameBox != null) document.body.removeChild(exitGameBox);
+    if (exitGameBox != null && exitGameBox.parentNode != null) document.body.removeChild(exitGameBox);
   }
 
   function pauseResumeGame() {
+    clearInterval(running);
     // game is over
     if (gameover) {
       canvas.removeEventListener('mousemove', placehitArea);
@@ -151,12 +154,14 @@ window.onload = function() {
     demo.autoplay = true;
     demo.load();
 
-    if (running) {
+    if (running || levelNum === 1) {
       blurOut(container);
       clearInterval(running);
-      canvas.removeEventListener('mousemove', placehitArea);
-      canvas.removeEventListener('click', addhitArea);
 
+      if (levelNum !== 1) {
+        canvas.removeEventListener('mousemove', placehitArea);
+        canvas.removeEventListener('click', addhitArea);
+      }
       // add resume game button
       var resumeGameButton = document.createElement('button');
       resumeGameButton.innerText = "Resume Game";
@@ -356,25 +361,27 @@ window.onload = function() {
   // add motion to the ball
   function moveBalls() {
 
-    ctx.clearRect(0,0, canvas.width, canvas.height);
+    if (ctx != null) ctx.clearRect(0,0, canvas.width, canvas.height);
 
-    // update coordinates of balls
-    for (var i=0;i<balls.length;i++) {
-      var ball = balls[i];
-      ball.x += ball.vx;
-      ball.y += ball.vy;
-      // keep the ball within the bounding box
-      if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-        ball.vy = -ball.vy;
+    if (canvas != null) {
+      // update coordinates of balls
+      for (var i=0;i<balls.length;i++) {
+        var ball = balls[i];
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+        // keep the ball within the bounding box
+        if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+          ball.vy = -ball.vy;
+        }
+        if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+          ball.vx = -ball.vx;
+        }
+        // draw out the ball
+        drawBall(ball);
       }
-      if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-        ball.vx = -ball.vx;
-      }
-      // draw out the ball
-      drawBall(ball);
+      // draw out the hit areas
+      makeHitAreas();
     }
-    // draw out the hit areas
-    makeHitAreas();
   }
 
   function makeHitAreas() {
@@ -669,6 +676,7 @@ window.onload = function() {
     // remove blur effects
     removeBlur(header);
     removeBlur(container);
+    clearInterval(running);
 
     // remove level levelPrompt
     if (levelPromptDiv != null) document.body.removeChild(levelPromptDiv);
@@ -701,6 +709,4 @@ window.onload = function() {
   }
 
   createHomePage();
-
-
 }

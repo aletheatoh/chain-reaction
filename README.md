@@ -2,11 +2,6 @@
 
 A web game built using the Canvas API in HTML5.
 
-## Built with
-- HTML5
-- CSS3
-- JavaScript
-
 ## How to Play the Game
 
 <span><img width="400" alt="screen shot 2018-03-14 at 9 54 18 pm" src="https://user-images.githubusercontent.com/22549537/37406658-a11c9a00-27d2-11e8-96e6-bc4df2d4c181.png"></span>
@@ -18,6 +13,11 @@ The score increment starts of with 10, and increases by a multiple of 10 with ea
 
 ## Creator
 Alethea Toh
+
+## Built with
+- HTML5
+- CSS3
+- JavaScript
 
 ## Acknowledgments
 - Sound effects from SoundBible.com

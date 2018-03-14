@@ -31,6 +31,7 @@ var ctx;
 var running; // setInterval turn on/off
 var balls = [];
 var hitAreas = [];
+var totalScore = 0;
 
 // player stats div
 var scoreBoard;
@@ -46,7 +47,7 @@ var instructionsBox;
 var exitGameBox;
 
 // other global variables
-var collisions = 0;
+var collisions = 0; // score for each round
 var collisions_expired = 0;
 var passed = true;
 var counterMusic = 0;
@@ -57,5 +58,3 @@ var messageShown = false;
 var gameover = false;
 var levelPromptShown = false;
 var counterPauseResume = 0;
-
-var speed = 30;

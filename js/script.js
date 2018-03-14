@@ -1,4 +1,3 @@
-
 window.onload = function() {
   // switch on/off music
   function musicOnOff() {
@@ -98,11 +97,11 @@ window.onload = function() {
     blurOut(header);
     blurOut(container);
     clearInterval(running);
+
     if (canvas != null) {
       canvas.removeEventListener('mousemove', placehitArea);
       canvas.removeEventListener('click', addhitArea);
     }
-
     var exitGameDiv = document.createElement('div');
     exitGameDiv.id = "exit-game-box";
     exitGameBox = exitGameDiv;
@@ -181,7 +180,6 @@ window.onload = function() {
       backButton.innerText = "Back";
       backButton.addEventListener('click', homePage);
       instructions.appendChild(backButton);
-
       // add start game button
       var startGameButtonCopy = startGameButton.cloneNode(true);
       instructions.appendChild(startGameButtonCopy);
@@ -200,22 +198,18 @@ window.onload = function() {
     while (navBar.firstChild) {
       navBar.removeChild(navBar.firstChild);
     }
-
     // remove credits
     if (creditsBox != null && creditsBox.parentNode != null) header.removeChild(creditsBox);
-
     // remove old player-stats bar
     var replace = document.querySelectorAll('.player-stats');
     for (var i=0; i<replace.length;i++) {
       container.removeChild(replace[i]);
     }
-
     // remove popup message
     var messages = document.querySelectorAll('#message');
     for (var i=0;i<messages.length;i++) {
       document.body.removeChild(messages[i]);
     }
-
     // rest background
     clearInterval(anotherRunning);
     context.clearRect(0,0, background.width, background.height);
@@ -230,13 +224,11 @@ window.onload = function() {
     for (var i=0; i<replace.length;i++) {
       container.removeChild(replace[i]);
     }
-
     // remove popup message
     var messages = document.querySelectorAll('#message');
     for (var i=0;i<messages.length;i++) {
       document.body.removeChild(messages[i]);
     }
-
     // reload the game
     loadGame();
   }
@@ -250,7 +242,7 @@ window.onload = function() {
 
       var text = document.createElement('div');
       text.id = "proceed-next-level-text";
-
+      totalScore += (collisions-1); // update total score
       // if passed round, proceed to next level
       if ( (collisions-1) >= passLevel[levelNum-1]) {
         passed = true;
@@ -262,13 +254,15 @@ window.onload = function() {
             var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
             winSound.play();
           }
-          message.style.height = "115px";
-          text.innerText = "Congratulations, you made it through all 5 levels! Wanna play again?";
+          text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ".Wanna play again?";
+          message.style.height = "135px";
           message.appendChild(text);
           var yes = document.createElement('button');
           yes.innerText = "Play Again";
           yes.addEventListener('click', function() {
+            // reser variables to 0
             levelNum = 0;
+            totalScore = 0;
             homePage();
             loadGame();
           });
@@ -458,11 +452,6 @@ window.onload = function() {
     var mouseY = e.clientY - canvas.offsetTop;
 
     ctx = myGameArea.context;
-    // ctx.beginPath();
-    // ctx.arc(mouseX, mouseY, 30, 0, Math.PI * 2);
-    // ctx.closePath();
-    // ctx.fillStyle = 'rgba(127, 255, 0, 0.6)';
-    // ctx.fill();
     var img = document.querySelector('#target');
     ctx.drawImage(img, mouseX-15, mouseY-15, 30, 30);
   }
@@ -591,9 +580,7 @@ window.onload = function() {
   }
 
   function loadGame() {
-
     clearInterval(anotherRunning);
-
     // remove background
     if (background != null) document.body.removeChild(background);
 

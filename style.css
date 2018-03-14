@@ -179,6 +179,7 @@ a {
   border-radius: 10px;
 }
 
+/* browser compatibility */
 /* @media (max-width: 800px) {
 #bounding-box {
 overflow: hidden;

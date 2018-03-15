@@ -23,6 +23,6 @@ The score increment starts with 10, and increases by a multiple of 10 with each 
 - JavaScript
 
 ## Acknowledgments
-- Sound effects taken from SoundBible.com
-- Target icon taken from ShareIcon.net
-- GitHub logo taken from GitHub Inc.
+- Sound effects: SoundBible.com
+- Target icon: ShareIcon.net
+- GitHub logo: GitHub Inc.

@@ -79,9 +79,6 @@ function createHomePage() {
   if (window.innerWidth <= 981) createBallsModified(100);
   else createBallsModified(50);
   anotherRunning = setInterval(moveBallsModified, 30);
-
-  console.log(window.innerWidth);
-  console.log(window.innerHeight);
 }
 
 // modify home page to game play mode
@@ -212,7 +209,6 @@ function pauseResumeGame() {
     // resume game
     else if (counterPauseResume % 2 === 1) {
       gamePaused = false;
-      console.log(levelPromptDiv);
       running = setInterval(moveBalls, 30);
       canvas.addEventListener('mousemove', placehitArea);
       canvas.addEventListener('click', addhitArea);

@@ -232,7 +232,6 @@ function levelPrompt() {
   var levelNumHeading = document.createElement('div');
   levelNumHeading.id = "level-num-heading";
   levelNumHeading.innerText = "Level " + levelNum;
-  levelNumHeading.style.fontWeight = "bold";
 
   prompt.appendChild(levelNumHeading);
   var text = document.createElement('div');

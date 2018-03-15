@@ -263,6 +263,10 @@ function loadGame() {
 
 // start the game
 function startGame() {
+
+  if (window.innerWidth <= 981) {
+    gameMusic.pause();
+  }
   // remove blur effects
   if (header != null) removeBlur(header);
   if (container != null) removeBlur(container);
@@ -302,6 +306,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
     if (musicOn) {
       gameMusic = new Audio('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
+      gameMusic.autoplay = true;
       gameMusic.loop = true;
       gameMusic.play();
     }

@@ -24,7 +24,7 @@ var passLevel = [1,3,8,15,40];
 
 if (window.innerWidth <= 981) {
   levelNumBalls = [10,20,40,60,100];
-  passLevel = [1,1,1,1,1];
+  passLevel = [1,8,15,30,80];
 }
 
 // home page buttons

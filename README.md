@@ -2,6 +2,9 @@
 
 <p>A web game built using the Canvas API in HTML5. Requires minimal effort, and great for killing boredom.</p>
 
+## Responsive Design
+<p>This game was designed to be mobile and tablet-friendly. However, please note that the difficulty level of the game is relatively higher on mobile and tablet devices due to the larger size of the canvas playing area.</p>
+
 [Click here](https://aletheatoh.github.io/chain-reaction/) for a demo!
 
 ## Play the Game

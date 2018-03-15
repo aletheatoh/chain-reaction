@@ -51,6 +51,12 @@
   #add-score-popup {
     top: 310px;
     font-size: 26px;
+    font-weight: normal;
+  }
+
+  #level-num-heading {
+    margin: 2px;
+    font-weight: normal;
   }
 
   #level-prompt {

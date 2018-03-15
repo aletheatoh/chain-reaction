@@ -10,7 +10,7 @@
 
 ## Play the Game
 
-&emsp;&emsp;&emsp;<span><img width="350" alt="screen shot 2018-03-15 at 11 32 00 pm" src="https://user-images.githubusercontent.com/22549537/37473357-2a6fffd2-28a9-11e8-8cf4-7355198a6915.png"></span><span>&emsp;</span><span><img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37473569-5d1c6d76-28a9-11e8-80a2-e203d1cfc102.png"></span>
+&emsp;&emsp;&emsp;&emsp;<span><img width="350" alt="screen shot 2018-03-15 at 11 32 00 pm" src="https://user-images.githubusercontent.com/22549537/37473357-2a6fffd2-28a9-11e8-8cf4-7355198a6915.png"></span><span>&emsp;</span><span><img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37473569-5d1c6d76-28a9-11e8-80a2-e203d1cfc102.png"></span>
 
 Place the target anywhere on the canvas, and capture as many balls as possible. At any given level, you need to capture a minimum number of balls in order to advance to the next level.
 

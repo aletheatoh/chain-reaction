@@ -5,6 +5,8 @@ var navBar = document.querySelector('nav');
 var container = document.getElementById('container');
 var header = document.querySelector('#header');
 var boundingBox = document.querySelector('#bounding-box');
+var content = document.querySelector('#content');
+
 
 // for background
 var backgroundBalls = [];
@@ -19,6 +21,11 @@ var creditsBox;
 var levelNum = 0;
 var levelNumBalls = [5,10,20,30,50];
 var passLevel = [1,3,8,15,40];
+
+if (window.innerWidth <= 981) {
+  levelNumBalls = [10,20,40,60,100];
+  passLevel = [1,1,1,1,1];
+}
 
 // home page buttons
 var startGameButton;

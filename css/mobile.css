@@ -1,0 +1,79 @@
+@media (max-width: 981px) {
+
+  #header {
+    border: 3px solid #d3d3d3;
+    padding: 6px;
+    width: 600px;
+    height: 140px;
+    margin: 100px auto 10px auto;
+  }
+
+  body {
+    font-size: 25px;
+  }
+
+  h1 {
+    font-size: 60px;
+  }
+
+  #credits {
+    font-size: 22px;
+    padding-top: 10px;
+  }
+
+  /* View Game Code On GitHub */
+  #github-logo {
+    width: 35px;
+    height: auto;
+  }
+
+  #view-github {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 10px 15px;
+    margin: 3px 6px;
+  }
+
+  /* Instructions Popup Box */
+  #instructions-box {
+    height: 410px;
+  }
+
+  /* Player Stats: Level #, Score, Balls Captured */
+  .player-stats {
+    width: 20%;
+  }
+
+  /* score increment board */
+  #add-score-popup {
+    top: 310px;
+    font-size: 26px;
+  }
+
+  #level-prompt {
+    height: 125px;
+  }
+
+  #level-prompt-text {
+    margin: 5px auto 8px auto;
+  }
+
+  #exit-game-box, #message {
+    height: 105px;
+  }
+
+}
+/*
+@media (min-height: 1523px) {
+  #container {
+    position: absolute;
+    left:0%;
+    right:0;
+    top:50%;
+    bottom:0;
+    margin: auto;
+  }
+} */

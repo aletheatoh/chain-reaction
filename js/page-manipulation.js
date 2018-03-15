@@ -31,6 +31,14 @@ function homePage() {
 function createHomePage() {
   header.style.margin = "200px auto 10px auto";
   header.style.height = "140px";
+
+  // brute force responsize design
+  if (window.innerWidth <= 981) {
+    header.style.margin = "600px auto 10px auto";
+    header.style.height = "180px";
+    header.style.width = "600px";
+  }
+
   var button1 = document.createElement('button');
   button1.id = "start-game";
   button1.innerText = "Start Game";
@@ -50,7 +58,7 @@ function createHomePage() {
   button3.innerText = "Music On/Off";
   musicButton = button3;
   navBar.appendChild(musicButton);
-  musicButton.addEventListener('click',musicOnOff);
+  musicButton.addEventListener('click', musicOnOff);
 
   var credits = document.createElement('div');
   creditsBox = credits;
@@ -62,13 +70,18 @@ function createHomePage() {
   background.width = window.innerWidth;
   background.height = window.innerHeight;
   background.id = "background";
-  document.body.insertBefore(background,header);
+  // document.body.insertBefore(background,header);
+  document.body.insertBefore(background,content);
 
   context = background.getContext('2d');
   context.clearRect(0,0, background.width, background.height);
 
-  createBallsModified(50);
+  if (window.innerWidth <= 981) createBallsModified(100);
+  else createBallsModified(50);
   anotherRunning = setInterval(moveBallsModified, 30);
+
+  console.log(window.innerWidth);
+  console.log(window.innerHeight);
 }
 
 // modify home page to game play mode
@@ -277,6 +290,12 @@ var proceedNextLevel = function() {
         }
         text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ". Wanna play again?";
         message.style.height = "135px";
+
+        // brute force browser resize
+        if (window.innerWidth <= 981) {
+          message.style.height = "165px";
+          message.style.width = "350px";
+        }
         message.appendChild(text);
         var yes = document.createElement('button');
         yes.innerText = "Play Again";

@@ -180,8 +180,13 @@ var myGameArea = {
   start : function() {
     this.canvas.width = 800;
     this.canvas.height = 450;
-    this.canvas.style.width = "800px";
-    this.canvas.style.height = "450px";
+
+    // resize canvas for mobile play
+    if (window.innerWidth <= 981) {
+      this.canvas.width = 820;
+      this.canvas.height = 820;
+    }
+
     this.canvas.id = "myCanvas";
     this.context = this.canvas.getContext("2d");
     // add to the bounding box
@@ -224,7 +229,7 @@ function loadGame() {
 
   // remove github ad
   var github = document.querySelector('#github');
-  if (github != null) document.body.removeChild(github);
+  if (github != null) content.removeChild(github);
 
   if (passed) {
     levelNum++; // increment level
@@ -247,6 +252,7 @@ function loadGame() {
   modifyHomePage();
 
   header.style.margin = "0 auto";
+
   myGameArea.start(); // create the canvas
   createBalls(levelNumBalls[levelNum-1]);
 

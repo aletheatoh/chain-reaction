@@ -1,3 +1,5 @@
+
+
 body {
   text-align: center;
   margin: 0 auto;
@@ -11,12 +13,11 @@ body {
 
 /* canvas homepage background */
 #background {
-  position:absolute;
   left:0;
   right:0;
   top:0;
   bottom:0;
-  margin:auto;
+  position: absolute;
   z-index: -1;
 }
 
@@ -106,6 +107,22 @@ a {
   margin-top: 80px;
 }
 
+/* Instructions Popup Box */
+#instructions-box {
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin: auto;
+  border: 3px solid #d3d3d3;
+  padding: 8px;
+  width: 400px;
+  height: 350px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
 /* Game Canvas - Playing Mode */
 #myCanvas {
   position: relative;
@@ -120,6 +137,11 @@ a {
 .player-stats {
   display: inline-block;
   width: 15%;
+}
+
+/* Game Prompt for each level */
+#level-num-heading {
+  margin: 2px;
 }
 
 #level-prompt {
@@ -137,6 +159,11 @@ a {
   border-radius: 10px;
 }
 
+#level-prompt-text {
+  margin: 5px auto 8px auto;
+}
+
+/* message boxes - pass/fail level messages, exit messages */
 #exit-game-box, #message {
   position:absolute;
   left:0;
@@ -152,33 +179,11 @@ a {
   border-radius: 10px;
 }
 
-#level-num-heading {
-  margin: 2px;
-}
-
-#level-prompt-text {
-  margin: 5px auto 8px auto;
-}
-
 #exit-game-ask, #description, #proceed-next-level-text {
   margin: 12px;
 }
 
-#instructions-box {
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  bottom:0;
-  margin: auto;
-  border: 3px solid #d3d3d3;
-  padding: 8px;
-  width: 400px;
-  height: 350px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-}
-
+/* score increment board */
 #add-score-popup {
   position:absolute;
   z-index: 2;

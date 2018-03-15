@@ -180,8 +180,10 @@ function resumeGame() {
     canvas.removeEventListener('click', addhitArea);
   }
   else {
-    canvas.addEventListener('mousemove', placehitArea);
-    canvas.addEventListener('click', addhitArea);
+    if (!hitAreaPlaced) {
+      canvas.addEventListener('mousemove', placehitArea);
+      canvas.addEventListener('click', addhitArea);
+    }
   }
 
   if (!levelPromptShown) running = setInterval(moveBalls, 30);
@@ -295,6 +297,7 @@ var proceedNextLevel = function() {
           message.style.height = "165px";
           message.style.width = "350px";
         }
+
         message.appendChild(text);
         var yes = document.createElement('button');
         yes.innerText = "Play Again";
@@ -350,6 +353,9 @@ var proceedNextLevel = function() {
       location.reload();
     });
     message.appendChild(no);
+
+    canvas.removeEventListener('mousemove', placehitArea);
+    canvas.removeEventListener('click', addhitArea);
 
     setTimeout(function() {
       document.body.appendChild(message);

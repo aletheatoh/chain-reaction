@@ -1,6 +1,6 @@
 `GLOBAL VARIABLES`
 
-// `DOCUMENT ELEMENTS`
+// DOCUMENT ELEMENTS
 var navBar = document.querySelector('nav');
 var container = document.getElementById('container');
 var header = document.querySelector('#header');

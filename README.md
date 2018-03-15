@@ -8,6 +8,9 @@
 ### Responsive Design
 <p>This game is designed to be mobile and tablet-friendly. However, please note that the difficulty level of the game is relatively higher on mobile and tablet devices due to the larger size of the canvas playing area.</p>
 
+### Constraints
+At present, audio features are not able to properly load on mobile devices.
+
 ## Play the Game
 
 &emsp;&emsp;&emsp;&emsp;<span><img width="350" alt="screen shot 2018-03-15 at 11 32 00 pm" src="https://user-images.githubusercontent.com/22549537/37473357-2a6fffd2-28a9-11e8-8cf4-7355198a6915.png"></span><span>&emsp;</span><span><img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37473569-5d1c6d76-28a9-11e8-80a2-e203d1cfc102.png"></span>

@@ -6,7 +6,7 @@
 
 ## Features
 ### Responsive Design
-<p>This game was designed to be mobile and tablet-friendly. However, please note that the difficulty level of the game is relatively higher on mobile and tablet devices due to the larger size of the canvas playing area.</p>
+<p>This game is designed to be mobile and tablet-friendly. However, please note that the difficulty level of the game is relatively higher on mobile and tablet devices due to the larger size of the canvas playing area.</p>
 
 ## Play the Game
 

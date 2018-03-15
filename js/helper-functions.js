@@ -58,7 +58,7 @@ function removeBlur(docElement) {
 // switch on/off music
 function musicOnOff() {
   if (counterMusic%2==0) {
-    gameMusic.stop();
+    gameMusic.pause();
     musicOn = false;
   }
   else if (counterMusic%2==1) {

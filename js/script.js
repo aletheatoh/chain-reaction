@@ -110,7 +110,7 @@ function makeHitAreas() {
         collisions_expired++;
         hitAreas.splice(i, 1);
         if (musicOn) {
-          var popSound = new sound("sound-effects/Bounce-SoundBible.com-12678623.mp3");
+          var popSound = new Audio("sound-effects/Bounce-SoundBible.com-12678623.mp3");
           popSound.play();
         }
       }
@@ -130,7 +130,7 @@ function checkCollision() {
     // if collision has occured
     if (ctx.isPointInPath(ball.x, ball.y)) {
       if (musicOn) {
-        var hitSound = new sound("sound-effects/Blop-Mark_DiAngelo-79054334.mp3");
+        var hitSound = new Audio("sound-effects/Blop-Mark_DiAngelo-79054334.mp3");
         hitSound.play();
       }
       // update score
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded',function(){
   window.onload = function() {
 
     if (musicOn) {
-      gameMusic = new sound('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
+      gameMusic = new Audio('sound-effects/Bubbles-SoundBible.com-810959520.mp3');
       gameMusic.loop = true;
       gameMusic.play();
     }

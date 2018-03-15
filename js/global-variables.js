@@ -45,6 +45,7 @@ var scoreBoard;
 var totalScoreBoard;
 var ballsCaptured;
 var addScoreDiv = document.querySelector('#add-score-popup');
+var highscore_alltime;
 
 // global variables for playing mode
 var startLevelButton;

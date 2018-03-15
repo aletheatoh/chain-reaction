@@ -79,10 +79,12 @@ function createHomePage() {
   if (window.innerWidth <= 981) createBallsModified(100);
   else createBallsModified(50);
   anotherRunning = setInterval(moveBallsModified, 30);
+
 }
 
 // modify home page to game play mode
 function modifyHomePage() {
+
   // clear home page buttons
   while (navBar.firstChild) {
     navBar.removeChild(navBar.firstChild);
@@ -288,6 +290,15 @@ var proceedNextLevel = function() {
         text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ". Wanna play again?";
         message.style.height = "135px";
 
+        // check if there has been a highscore
+        if (window.localStorage.highscore == undefined) {
+          window.localStorage.setItem("highscore", totalScore);
+        } else {
+          if (totalScore > window.localStorage.highscore) {
+            window.localStorage.setItem("highscore", totalScore);
+          }
+        }
+
         // brute force browser resize
         if (window.innerWidth <= 981) {
           message.style.height = "165px";
@@ -332,6 +343,7 @@ var proceedNextLevel = function() {
         loseSound.play();
       }
       passed = false;
+      totalScore -= roundScore;
       text.innerText = "Failed to pass Level " + levelNum + ". Try again?";
       message.appendChild(text);
       var try_again = document.createElement('button');
@@ -364,22 +376,18 @@ function displayPlayerStats() {
   level.setAttribute('class', 'player-stats');
   level.id = 'level';
   level.innerText = "Level " + levelNum;
-  // level.style.fontWeight = "bold";
-  container.appendChild(level);
 
   var score = document.createElement('div');
   score.setAttribute('class', 'player-stats');
   score.id = 'score';
   scoreBoard = score;
   score.innerText = "Level score: " + roundScore;
-  container.appendChild(score);
 
   var score_all_levels = document.createElement('div');
   score_all_levels.setAttribute('class', 'player-stats');
   score_all_levels.id = 'score-all-levels';
   totalScoreBoard = score_all_levels;
   score_all_levels.innerText = "Total score: " + totalScore;
-  container.appendChild(score_all_levels);
 
   var collisions = document.createElement('div');
   collisions.setAttribute('class', 'player-stats');
@@ -387,7 +395,20 @@ function displayPlayerStats() {
   ballsCaptured = collisions;
   collisions.innerText = "Balls captured: 0";
 
+  var highscore = document.createElement('div');
+  highscore.setAttribute('class', 'player-stats');
+  highscore.id = 'highscore';
+  highscore_alltime = highscore;
+
+  // retrieve from local storage
+  if (window.localStorage.highscore == undefined) {
+    highscore.innerText = "Highscore: N/A";
+  } else {
+    highscore.innerText = "Highscore: " + window.localStorage.highscore;
+  }
+
   // insert above canvas
+  container.insertBefore(highscore, container.childNodes[0]);
   container.insertBefore(collisions, container.childNodes[0]);
   container.insertBefore(score_all_levels, container.childNodes[0]);
   container.insertBefore(score, container.childNodes[0]);

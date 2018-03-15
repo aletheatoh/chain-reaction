@@ -217,6 +217,7 @@ function loadGame() {
   addScoreDiv.innerText = "";
 
   clearInterval(anotherRunning);
+
   // remove background
   if (background != null) document.body.removeChild(background);
 
@@ -228,8 +229,8 @@ function loadGame() {
   if (creditsBox != null && creditsBox.parentNode != null) header.removeChild(creditsBox);
 
   // remove github ad
-  var github = document.querySelector('#github');
-  if (github != null) content.removeChild(github);
+  var github_div = document.querySelector('#github');
+  if (github_div != null) content.removeChild(github_div);
 
   if (passed) {
     levelNum++; // increment level

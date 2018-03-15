@@ -136,7 +136,7 @@ a {
 /* Player Stats: Level #, Score, Balls Captured */
 .player-stats {
   display: inline-block;
-  width: 15%;
+  width: 12%;
 }
 
 /* Game Prompt for each level */

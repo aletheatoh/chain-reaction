@@ -285,7 +285,7 @@ var proceedNextLevel = function() {
       // completed all levels
       if (levelNum === 5) {
         if (musicOn) {
-          var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
+          var winSound = new Audio("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
           winSound.play();
         }
         text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ". Wanna play again?";

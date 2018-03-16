@@ -15,21 +15,22 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 
 #### Approach and Process
 
-1. What in my process and approach to this project would I do differently next time?
+1. **What in my process and approach to this project would I do differently next time?**
+
    - I would organize my code better into different files instead of just writing everything in one gigantic script
 
 
-1. What in my process and approach to this project went well that I would repeat next time?
-   - I thought I approached the planning and development of my web game well. During the planning stage, I detailed my wireframes, user stories and key features I would include in my game on pen and paper. This gave me a clearer picture of how I wanted my game to turn out, and allowed me to clearly define my goals in creating the game.
+1. **What in my process and approach to this project went well that I would repeat next time?**
 
---
+   - I thought I approached the planning and development of my web game well. During the planning stage, I detailed my wireframes, user stories and key features I would include in my game on pen and paper. This gave me a clearer picture of how I wanted my game to turn out, and allowed me to clearly define my goals in creating the game.
 
 #### Code and Code Design
 
-1. What in my code and program design in the project would I do differently next time?
+1. **What in my code and program design in the project would I do differently next time?**
+
    - Instead of constantly adding and removing divs, I could perhaps change my program such that I would add divs to my html code from the start, and just change the display settings (ie. "none") based on whether I want it to appear or not.
 
-1. What in my code and program design in the project went well? Is there anything I would do the same next time?
+1. **What in my code and program design in the project went well? Is there anything I would do the same next time?**
 
    - I felt that I did a good job of separating my code into different functions, which made it useful for calling functions repeatedly.
 

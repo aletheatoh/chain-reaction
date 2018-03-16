@@ -20,7 +20,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 
 
 1. What in my process and approach to this project went well that I would repeat next time?
-   - I thought I approached the planning and development of my web game well. During the planning stage, I detailed my wireframes, user stories and key features I would include in my game on pen and paper. This gave me a clearer picture of how I wanted my game to turn out, and allowed me to clearly define the goals of my game.
+   - I thought I approached the planning and development of my web game well. During the planning stage, I detailed my wireframes, user stories and key features I would include in my game on pen and paper. This gave me a clearer picture of how I wanted my game to turn out, and allowed me to clearly define my goals in creating the game.
 
 --
 
@@ -33,8 +33,10 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 
    - I felt that I did a good job of separating my code into different functions, which made it useful for calling functions repeatedly.
 
-   - I felt I did a good job of utilizing global variables. This eliminated many lines of unnecessary code whereby I would otherwise have to repeatedly find the respective document elements.
+   - I felt I did a good job of utilizing global variables. This eliminated many lines of unnecessary code whereby I would otherwise have to repeatedly locate the respective document elements. See example below:
     ```
+    `GLOBAL VARIABLES`
+
     // DOCUMENT ELEMENTS
     var navBar = document.querySelector('nav');
     var container = document.getElementById('container');
@@ -57,7 +59,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
     var passLevel = [1,3,8,15,40];
     ```
 
-    - I felt I did a good job of preventing null pointer exceptions.
+    - I felt I did a good job of preventing null pointer exceptions. See example below:
     ```
     if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
 

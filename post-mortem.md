@@ -17,12 +17,14 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 
 1. **What in my process and approach to this project would I do differently next time?**
 
-   - I would organize my code better into different files instead of just writing everything in one gigantic script
+   - I would organize my code better into different files instead of just writing everything in one gigantic script.
 
 
 1. **What in my process and approach to this project went well that I would repeat next time?**
 
    - I thought I approached the planning and development of my web game well. During the planning stage, I detailed my wireframes, user stories and key features I would include in my game on pen and paper. This gave me a clearer picture of how I wanted my game to turn out, and allowed me to clearly define my goals in creating the game.
+
+   (insert wireframes here)
 
 #### Code and Code Design
 
@@ -33,6 +35,8 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 1. **What in my code and program design in the project went well? Is there anything I would do the same next time?**
 
    - I felt that I did a good job of separating my code into different functions, which made it useful for calling functions repeatedly.
+
+   (insert collapsed version of helper functions here)
 
    - I felt I did a good job of utilizing global variables. This eliminated many lines of unnecessary code whereby I would otherwise have to repeatedly locate the respective document elements. See example below:
     ```

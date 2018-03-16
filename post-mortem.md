@@ -31,6 +31,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 1. **What in my code and program design in the project would I do differently next time?**
 
    - Instead of constantly adding and removing divs, I could perhaps change my program such that I would add divs to my html code from the start, and just change the display settings (ie. "none") based on whether I want it to appear or not.
+   - Moving forward, I am considering adding more obstacles to my game. For example, I am thinking of restricting the boundaries in which I can place my target hit area. 
 
 1. **What in my code and program design in the project went well? Is there anything I would do the same next time?**
 
@@ -64,7 +65,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
     var passLevel = [1,3,8,15,40];
     ```
 
-    - I felt I did a good job of preventing null pointer exceptions. See example below:
+    - I felt I did a good job of handling null pointer exceptions. See example below:
     ```
     if (instructionsBox != null && instructionsBox.parentNode != null) document.body.removeChild(instructionsBox);
 

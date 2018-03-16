@@ -322,7 +322,7 @@ var proceedNextLevel = function() {
         // advance to the next level
         // play sound
         if (musicOn) {
-          var winSound = new sound("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
+          var winSound = new Audio("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
           winSound.play();
         }
         text.innerText = "Well Done! Advance to Level " + (levelNum+1) + "?";

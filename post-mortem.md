@@ -37,7 +37,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 
    - I felt that I did a good job of separating my code into different functions, which made it useful for calling functions repeatedly.
 
-   (insert collapsed version of helper functions here)
+   &emsp;<img width="380" alt="screen shot 2018-03-16 at 2 47 20 pm" src="https://user-images.githubusercontent.com/22549537/37507353-07dfad70-2929-11e8-8c50-ca3ccd14a7f0.png">
 
    - I felt I did a good job of utilizing global variables. This eliminated many lines of unnecessary code whereby I would otherwise have to repeatedly locate the respective document elements. See example below:
     ```

@@ -288,22 +288,47 @@ var proceedNextLevel = function() {
           var winSound = new Audio("sound-effects/Cheering-SoundBible.com-1115515042.mp3");
           winSound.play();
         }
-        text.innerText = "Congratulations, you made it through all 5 levels! Your total score is " + totalScore + ". Wanna play again?";
-        message.style.height = "135px";
 
         // check if there has been a highscore
         if (window.localStorage.highscore == undefined) {
           window.localStorage.setItem("highscore", totalScore);
+          text.innerText = "Congratulations, you made it through all 5 levels! \n Your total score is " + totalScore + ", and you set a new highscore of " + totalScore + "! Bravo! \n Wanna play again?";
+          message.style.height = "160px";
+          message.style.width = "350px";
+
+          // brute force browser resize
+          if (window.innerWidth <= 981) {
+            message.style.height = "225px";
+            message.style.width = "350px";
+          }
+
         } else {
+          // new highscore
           if (totalScore > window.localStorage.highscore) {
             window.localStorage.setItem("highscore", totalScore);
-          }
-        }
+            text.innerText = "Congratulations, you made it through all 5 levels! \n Your total score is " + totalScore + ", and you set a new highscore of " + totalScore + "! Bravo! \n Wanna play again?";
+            message.style.height = "160px";
+            message.style.width = "350px";
 
-        // brute force browser resize
-        if (window.innerWidth <= 981) {
-          message.style.height = "165px";
-          message.style.width = "350px";
+            // brute force browser resize
+            if (window.innerWidth <= 981) {
+              message.style.height = "225px";
+              message.style.width = "350px";
+            }
+
+          }
+          else {
+            // no new highscore
+            text.innerText = "Congratulations, you made it through all 5 levels! \n Your total score is " + totalScore + ". Wanna play again?";
+            message.style.height = "115px";
+            message.style.width = "350px";
+
+            // brute force browser resize
+            if (window.innerWidth <= 981) {
+              message.style.height = "195px";
+              message.style.width = "350px";
+            }
+          }
         }
 
         message.appendChild(text);

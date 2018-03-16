@@ -340,7 +340,7 @@ var proceedNextLevel = function() {
     // if did not pass round, ask if try again
     else {
       if (musicOn) {
-        var loseSound = new sound("sound-effects/Crowd Boo 3-SoundBible.com-595364990.mp3");
+        var loseSound = new Audio("sound-effects/Crowd Boo 3-SoundBible.com-595364990.mp3");
         loseSound.play();
       }
       passed = false;

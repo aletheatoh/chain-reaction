@@ -136,6 +136,7 @@ function instructions() {
   demodiv.appendChild(demo);
   instructions.appendChild(demodiv);
   demo.autoplay = true;
+  demo.controls = true;
   demo.load();
 
   if (running || levelNum === 1) {

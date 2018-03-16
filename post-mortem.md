@@ -16,7 +16,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 #### Approach and Process
 
 1. What in my process and approach to this project would I do differently next time?
-  - I would organize my code better into different files instead of just writing everything in one gigantic script
+       - I would organize my code better into different files instead of just writing everything in one gigantic script
 
 
 1. What in my process and approach to this project went well that I would repeat next time?

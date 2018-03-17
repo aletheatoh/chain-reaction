@@ -2,10 +2,7 @@
 
 ## Concept Design
 
-| Problem Statement  | Solution |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+### Problem Statement
 
 My goal is to create a game for stressed students and workaholics who want to take a short break and play a web game. I aim to design the game such that it provides a quick and effective form of de-stress, while not being too addictive.
 
@@ -22,4 +19,4 @@ I observed that [stressed students and workaholics, who often spend hours on the
 
 ## Wireframing
 
-Make a wireframe for each page you need to fulfill the user stories.
+![chain-reaction - wireframe](https://user-images.githubusercontent.com/22549537/37555519-3837a554-2a23-11e8-9849-f26132e3baa8.png)

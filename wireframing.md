@@ -11,6 +11,8 @@ My goal is to create a game for stressed students and workaholics who want to ta
 
 In this vein, I will confine my game to 5 levels to limit the time of a given playing session.
 
+I observed that [stressed students and workaholics, who often spend hours on their laptops/mobiles daily] isn’t meeting [these goals/needs], which is causing [this adverse effect]. How might we improve so that our product/service/team/organization is more successful based on [these measurable criteria]?
+
 ## User Stories
 
 - As a player, I want my game to be visually appealing so that I will have a more enjoyable game experience.

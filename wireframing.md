@@ -4,17 +4,16 @@
 
 ### Problem Statement
 
-From both observation and experience, I believe that stressed students and workaholics, who often spend hours on their laptops/mobiles daily, get easily distracted by online games that are often addictive, which is exacerbating procrastination and decreasing productivity levels.
+In today's digital-driven society, many school students and working adults, who often spend hours on their laptops daily, often like to play online games while taking a break from work. However, from both observation and experience, such games are often addictive, resulting in decreasing productivity levels and prolonged procrastination.
 
-In this vein, my goal is to create a web game that provides a quick and effective form of de-stress, while not being too addictive.
-
-In this vein, I will confine my game to 5 levels to limit the time of a given playing session.
+### Solution
+As such, my goal is to create a web game that provides a quick and effective form of de-stress, while not being too addictive.
 
 ## User Stories
 
 | User Story | Feature |
 | ------------ | ------------------ |
-| As a player, I want my game to be visually appealing so that I will have a more enjoyable game experience. | Colorful game design |
+| As a player, I want my game to be visually appealing so that I will have a more enjoyable game experience. | Integrate a colorful design for the game. |
 | As a busy person, I want to play a game that is fun but not too addictive. |Confine game to 5 levels to limit the time of a given playing session. |
 | As a player, I want to play a game that involves an element of strategy so that I will feel challenged. | Balls will movely randomly on the screen, but player has to strategically position target to capture as many balls as possible. |
 | As a stressed-out student/workaholic, I want to play a game that requires minimal effort. | Player only makes 1 move per round. |

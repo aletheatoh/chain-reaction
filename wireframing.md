@@ -2,9 +2,14 @@
 
 ## Concept Design
 
-My goal is to create a game for stressed students and workaholics who want to take a short break and play a web game. I aim to design the game such that it provides a quick and effective form of de-stress, while not being too addictive. In this vein, I will confine my game to 5 levels to limit the time of a given playing session.
+| Problem Statement  | Solution |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
-Come up with a solution to that problem.
+My goal is to create a game for stressed students and workaholics who want to take a short break and play a web game. I aim to design the game such that it provides a quick and effective form of de-stress, while not being too addictive.
+
+In this vein, I will confine my game to 5 levels to limit the time of a given playing session.
 
 ## User Stories
 

@@ -1,17 +1,4 @@
 ## Project Post Mortem
-Post mortems are important to understand about what happened in a project and actively think about what you learned.
-
-Post-mortems are meant to be a blame-less space open to objective conversation about what went well and what could be improved.
-
-Even in the examples below, where tens of millions of dollars could be lost, the best approach is to think through the series of events that led to the outcome.
-
-Large mistakes are almost never the fault of the developer, but of the systems and processes in place to prevent errors and problems.
-
-[https://github.com/danluu/post-mortems](https://github.com/danluu/post-mortems)
-https://blog.codinghorror.com/the-project-postmortem/
-
-### What to Bring
-Please answer the following questions. Take at least 30 minutes to prepare.
 
 #### Approach and Process
 
@@ -31,7 +18,7 @@ Please answer the following questions. Take at least 30 minutes to prepare.
 1. **What in my code and program design in the project would I do differently next time?**
 
    - Instead of constantly adding and removing divs, I could perhaps change my program such that I would add divs to my html code from the start, and just change the display settings (ie. "none") based on whether I want it to appear or not.
-   - Moving forward, I am considering adding obstacles to my game. For example, I am thinking of restricting the boundaries in which I can place my target hit area. 
+   - Moving forward, I am considering adding obstacles to my game. For example, I am thinking of restricting the boundaries in which I can place my target hit area.
 
 1. **What in my code and program design in the project went well? Is there anything I would do the same next time?**
 

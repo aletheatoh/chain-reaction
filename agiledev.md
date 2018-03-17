@@ -31,4 +31,4 @@ Wireframes were designed using Wireframe.cc and can also be found [here](https:/
 | Level 4  | <img width="310" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37556725-e770d124-2a34-11e8-8393-2899ead39eec.png">  | Level 5  | <img width="310" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37556726-e7a34ab4-2a34-11e8-913b-ba4dc6782cfb.png">  |
 | Collision (Pic 1) | <img width="310" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37556727-e7e18162-2a34-11e8-9721-bb943b0632ad.png"> When a ball collides into hit area | Collision (Pic 2)  | <img width="310" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37556728-e8149660-2a34-11e8-8c08-c1eecebf03a5.png"> Another hit area created |
 
-\*Hit areas will disappear after 5 seconds\
+\*Hit areas will disappear after 5 seconds

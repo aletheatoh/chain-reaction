@@ -4,7 +4,9 @@
 
 ### Problem Statement
 
-In today's digital-driven society, many school students and working adults, who often spend hours on their laptops daily, often like to play online games while taking a break from work. However, from both observation and experience, such games are often addictive, resulting in decreasing productivity levels and prolonged procrastination.
+In today's digital-driven society, it is no surprise that school students and working adults across the globe spend hours on their laptops daily. When taking a break from work, many often like to play online games, such as DOTA, League of Legends and Candy Crush Saga, to name a few.
+
+However, from both observation and experience, such games are often addictive, resulting in decreasing productivity levels and prolonged procrastination.
 
 ### Solution
 As such, my goal is to create a web game that provides a quick and effective form of de-stress, while not being too addictive.
@@ -13,12 +15,14 @@ As such, my goal is to create a web game that provides a quick and effective for
 
 | User Story | Feature |
 | ------------ | ------------------ |
-| As a player, I want my game to be visually appealing so that I will have a more enjoyable game experience. | Integrate a colorful design for the game. |
+| As a stressed-out and tired student/workaholic, I want to play a game that requires minimal effort. | Player only makes 1 move per round. |
 | As a busy person, I want to play a game that is fun but not too addictive. |Confine game to 5 levels to limit the time of a given playing session. |
+| As a player, I want my game to be visually appealing so that I will have a more enjoyable game experience. | Integrate a colorful design for the game. |
 | As a player, I want to play a game that involves an element of strategy so that I will feel challenged. | Balls will movely randomly on the screen, but player has to strategically position target to capture as many balls as possible. |
-| As a stressed-out student/workaholic, I want to play a game that requires minimal effort. | Player only makes 1 move per round. |
 
 ## Wireframing
+
+Wireframes were designed using Wireframe.cc and can also be found [here](https://wireframe.cc/pro/pp/d5cfc292d150803).
 
 | Page | Wireframe | Page | Wireframe |
 | -------- | ------------- | ------------- | ------------- |

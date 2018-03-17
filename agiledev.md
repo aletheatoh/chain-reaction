@@ -9,7 +9,7 @@ In today's digital-driven society, it is no surprise that school students and wo
 However, from both observation and experience, such games are often addictive, resulting in decreasing productivity levels and prolonged procrastination.
 
 ### Solution
-As such, my goal is to create a web game that provides a quick and effective form of de-stress, while not being too addictive.
+My goal is to create a web game that provides a quick and effective form of de-stress, while not being too addictive.
 
 ## User Stories
 

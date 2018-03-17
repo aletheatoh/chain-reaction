@@ -19,8 +19,8 @@ I observed that [stressed students and workaholics, who often spend hours on the
 
 ## Wireframing
 
-| Page  | Wireframe | Page  | Wireframe |
+| Page | Wireframe | Page | Wireframe |
 | -------- | ------------- | ------------- | ------------- |
-| Homepage | <img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555629-7c9bc98a-2a25-11e8-8895-c0868d386cf4.png">  | Level 1  | <img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555651-cbbefc44-2a25-11e8-9894-46bd4b462e43.png">  |
-| Level 2 | <img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555661-082c6cb6-2a26-11e8-8800-5f3fc84eaf5e.png">  | Level 3  | <img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555662-118b2a68-2a26-11e8-84d9-d382fd48b915.png">  |
-| Level 4  | <img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555663-15419f2a-2a26-11e8-993f-f3bc8203dea3.png">  | Level 5  | <img width="350" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555667-206a2002-2a26-11e8-83a3-ba644962b674.png">  |
+| Homepage | <img width="330" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555629-7c9bc98a-2a25-11e8-8895-c0868d386cf4.png">  | Level 1  | <img width="330" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555651-cbbefc44-2a25-11e8-9894-46bd4b462e43.png">  |
+| Level 2 | <img width="330" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555661-082c6cb6-2a26-11e8-8800-5f3fc84eaf5e.png">  | Level 3  | <img width="330" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555662-118b2a68-2a26-11e8-84d9-d382fd48b915.png">  |
+| Level 4  | <img width="330" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555663-15419f2a-2a26-11e8-993f-f3bc8203dea3.png">  | Level 5  | <img width="330" alt="screen shot 2018-03-15 at 11 33 39 pm" src="https://user-images.githubusercontent.com/22549537/37555667-206a2002-2a26-11e8-83a3-ba644962b674.png">  |

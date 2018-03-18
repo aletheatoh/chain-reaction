@@ -4,21 +4,21 @@
 
 ### Problem Statement
 
-In today's digital-driven society, it is no surprise that school students and working adults across the globe spend hours on their laptops daily. When taking a break from work, many often like to play online games, such as DOTA, League of Legends and Candy Crush Saga, to name a few.
+In today's digital-driven society, it is no surprise that school students and working adults across the globe spend hours on their laptops every day. When taking breaks, many often like to play online games, such as DOTA, League of Legends and Candy Crush Saga, to name a few.
 
 However, from both observation and experience, such games are often addictive, resulting in decreasing productivity levels and prolonged procrastination.
 
 ### Solution
-My goal is to create a web game that provides a quick and effective form of de-stress, while not being too addictive.
+My goal is to create a web game that provides a quick and effective outlet to relieve stress, while not being too addictive.
 
 ## User Stories
 
 | User Story | Feature |
 | ------------ | ------------------ |
-| As a stressed-out and tired student/workaholic, I want to play a game that requires minimal effort. | Player only makes 1 move per round. |
-| As a busy person, I want to play a game that is fun but not too addictive. |Confine game to 5 levels to limit the time of a given playing session. |
-| As a player, I want my game to be visually appealing so that I will have a more enjoyable game experience. | Integrate a colorful design for the game. |
-| As a player, I want to play a game that involves an element of strategy so that I will feel challenged. | Balls will movely randomly on the screen, but player has to strategically position target to capture as many balls as possible. |
+| As a stressed and worn-out student/workaholic, I want to play a game that requires minimal effort. | Design the game such that player only makes 1 move per round. |
+| As a student/working adult with lots on my plate, I want to play a game that is fun but not too addictive. | Limit game to 5 levels to reduce the time of a given playing session. |
+| As a player, I want my game to be aesthetically pleasing so that I will have a more enjoyable game experience. | Integrate a colorful design for the game. |
+| As a player, I want to play a game that involves an element of strategy so that I will feel challenged. | Balls will movely randomly on the screen to add an element of luck and spontaneity, but player has to strategically position target to capture as many balls as possible. |
 
 ## Wireframing
 

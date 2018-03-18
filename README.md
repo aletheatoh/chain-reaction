@@ -27,7 +27,7 @@ The score increment starts with 10, and increases by a multiple of 10 with each 
 - Audio features are not able to properly load on mobile devices.
 
 ## Planning and Development
-Agile development methodologies such as creating user stories and wireframes were used in this project. Please refer to [here](https://github.com/aletheatoh/chain-reaction/blob/master/agiledev.md) for a detailed description of my agile development process. 
+Agile development methodologies, namely creating user stories and designing wireframes, were used in this project. Please refer to [here](https://github.com/aletheatoh/chain-reaction/blob/master/agiledev.md) for a detailed description of my agile development process. 
 
 ## Acknowledgments
 - Sound effects: SoundBible.com

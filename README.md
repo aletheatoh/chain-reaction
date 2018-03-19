@@ -27,7 +27,7 @@ Agile development methodologies, namely creating user stories and designing wire
 <p>I am currently working on improving the responsive design for mobile devices.</p>
 
 ### Unresolved Problems
-- Audio features are not able to properly load on mobile devices.
+- Audio features do not properly load on mobile devices.
 
 ## Acknowledgments
 - Sound effects: SoundBible.com

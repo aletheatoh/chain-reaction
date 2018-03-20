@@ -6,7 +6,7 @@
 
 In today's digital-driven society, it is no surprise that school students and working adults across the globe spend hours on their laptops every day. When taking breaks, many often turn to online games, such as DOTA, League of Legends and Candy Crush Saga, for a momentary stress relief.
 
-However, from both observation and experience, such games are often addictive and counterproductive, as they often prolonge procrastination of work and hence dampen productivity levels.
+However, from both observation and experience, such games are often addictive and counterproductive, as they often prolong procrastination of work and hence dampen productivity levels.
 
 ### Solution
 My goal is to create a game that provides a **quick and effective outlet to relieve stress**, but one that **limits the likelihood of addiction**.

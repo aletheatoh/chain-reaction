@@ -12,9 +12,6 @@ Place the target anywhere on the canvas, and capture as many balls as possible. 
 
 The score increment starts with 10, and increases by a multiple of 10 with each successive collision. The larger the chain reaction you create, the more points you score!
 
-## Planning and Development
-Please refer to [here](https://github.com/aletheatoh/chain-reaction/blob/master/agile-dev/agiledev.md) for a detailed description of my agile development process. 
-
 ## Built with
 - HTML5
 - CSS3
